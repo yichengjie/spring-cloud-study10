@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: "jdbc:hsqldb:mem:mydb"
+    username: "SA"
+    password: "SA"
+    driver-class-name: org.hsqldb.jdbcDriver
+    tomcat:
+      max-wait: 10000
+      max-active: 50
+      test-on-borrow: true
