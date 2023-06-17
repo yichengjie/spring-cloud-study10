@@ -1,0 +1,27 @@
+server:
+  port: 7071
+  compression:
+    enabled: true
+spring:
+  application:
+    name: eureka-client
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka/
+  instance:
+    prefer-ip-address: true
+# Actuator Web 访问端口
+#management:
+#  server:
+#    port: 8081
+#  endpoints:
+#    jmx:
+#      exposure:
+#        include: "*"
+#    web:
+#      exposure:
+#        include: "*"
+#  endpoint:
+#    health:
+#      show-details: always
