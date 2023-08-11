@@ -1,34 +1,33 @@
 package com.yicj.mybatis.service;
 
+import com.baomidou.dynamic.datasource.toolkit.DynamicDataSourceContextHolder;
 import com.yicj.mybatis.MybatisApplication;
-import com.yicj.mybatis.repository.entity.UserEntity;
-import com.yicj.mybatis.repository.mapper.UserMapper;
+import com.yicj.mybatis.repository.entity.AuditLogEntity;
+import com.yicj.mybatis.utils.CommonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
- * 防全表更新与删除插件
  * @author: yicj
- * @date: 2023/8/11 11:17
+ * @date: 2023/8/11 20:40
  */
 @Slf4j
-@Transactional
+//@Transactional
 @SpringBootTest(classes = MybatisApplication.class)
-public class BlockAttackInnerInterceptorTest {
+public class AuditLogServiceTest {
 
     @Autowired
-    private UserService userService ;
-
+    private AuditLogService auditLogService ;
 
     @Test
-    void blockAttack(){
-        UserEntity user = new UserEntity() ;
-        user.setId(1);
-        user.setName("update name");
-        userService.update(user, null) ;
+    public void listAll(){
+        List<AuditLogEntity> list = auditLogService.list();
+        CommonUtil.printList(list, 10);
     }
 
 }

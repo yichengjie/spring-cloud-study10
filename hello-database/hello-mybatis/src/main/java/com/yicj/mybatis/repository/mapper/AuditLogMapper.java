@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @date: 2023/8/11 20:11
  */
 @Mapper
+@DS("slave_1")
 public interface AuditLogMapper extends BaseMapper<AuditLogEntity> {
 
 }
