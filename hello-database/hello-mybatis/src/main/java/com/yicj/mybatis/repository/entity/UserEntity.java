@@ -8,7 +8,7 @@ import lombok.Data;
  * @date: 2023/8/11 8:58
  */
 @Data
-@TableName("user")
+@TableName("t_user")
 public class UserEntity {
 
     private Integer id ;

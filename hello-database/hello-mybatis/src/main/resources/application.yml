@@ -4,3 +4,6 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/test
     username: root
     password: root
+logging:
+  level:
+    com.yicj.mybatis.repository.mapper: debug
