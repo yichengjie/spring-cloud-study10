@@ -18,6 +18,7 @@
 
     <modules>
         <module>hello-jdbc</module>
+        <module>hello-mybatis</module>
     </modules>
     <packaging>pom</packaging>
 
