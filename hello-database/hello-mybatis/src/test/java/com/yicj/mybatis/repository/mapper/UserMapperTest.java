@@ -1,10 +1,12 @@
 package com.yicj.mybatis.repository.mapper;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yicj.mybatis.MybatisApplication;
 import com.yicj.mybatis.repository.entity.UserEntity;
+import com.yicj.mybatis.utils.CommonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +30,15 @@ public class UserMapperTest {
     @Test
     void listAll(){
         List<UserEntity> list = userMapper.selectList(new QueryWrapper<>());
-        log.info("list size : {}", list.size());
-        list.forEach(item -> log.info("item : {}", item));
+        CommonUtil.printList(list, 10);
+    }
+
+    @Test
+    void listWithWrapper(){
+        LambdaQueryWrapper<UserEntity> wrapper = new LambdaQueryWrapper<>() ;
+        wrapper.like(UserEntity::getName, "王五") ;
+        List<UserEntity> list = userMapper.selectList(wrapper);
+        CommonUtil.printList(list, 10);
     }
 
     @Test

@@ -1,6 +1,10 @@
 package com.yicj.mybatis.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.core.injector.AbstractMethod;
+import com.baomidou.mybatisplus.core.injector.DefaultSqlInjector;
+import com.baomidou.mybatisplus.core.metadata.TableInfo;
+import com.baomidou.mybatisplus.extension.injector.methods.InsertBatchSomeColumn;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.handler.TenantLineHandler;
 import com.baomidou.mybatisplus.extension.plugins.inner.*;
@@ -8,6 +12,8 @@ import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.LongValue;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -28,8 +34,26 @@ public class MybatisConfig {
         //动态表名插件
         interceptor.addInnerInterceptor(dynamicTableNamePlusInterceptor());
         //数据变动记录插件
-        interceptor.addInnerInterceptor(new DataChangeRecorderInnerInterceptor());
+        //interceptor.addInnerInterceptor(new DataChangeRecorderInnerInterceptor());
         return interceptor;
+    }
+
+    @Bean
+    public CustomSqlInjector customSqlInjector(){
+        return new CustomSqlInjector() ;
+    }
+
+
+    // 批量插入
+    static class CustomSqlInjector extends DefaultSqlInjector{
+
+        @Override
+        public List<AbstractMethod> getMethodList(Class<?> mapperClass, TableInfo tableInfo) {
+            List<AbstractMethod> methodList = super.getMethodList(mapperClass, tableInfo);
+            // 将批量insert方法添加进去
+            methodList.add(new InsertBatchSomeColumn()) ;
+            return methodList ;
+        }
     }
 
 
@@ -75,6 +99,9 @@ public class MybatisConfig {
 //    public ConfigurationCustomizer configurationCustomizer() {
 //        return configuration -> configuration.setUseDeprecatedExecutor(false);
 //    }
+
+
+
 
 }
 

@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.yicj.mybatis.repository.entity.UserEntity;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * @author: yicj
  * @date: 2023/8/11 9:01
@@ -12,5 +14,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface UserMapper extends BaseMapper<UserEntity> {
 
 
+    Integer insertBatchSomeColumn(List<UserEntity> entity) ;
 
 }
