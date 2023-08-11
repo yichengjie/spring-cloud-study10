@@ -1,6 +1,7 @@
 package com.yicj.mybatis.service;
 
 import com.baomidou.dynamic.datasource.toolkit.DynamicDataSourceContextHolder;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.yicj.mybatis.MybatisApplication;
 import com.yicj.mybatis.repository.entity.AuditLogEntity;
 import com.yicj.mybatis.utils.CommonUtil;
@@ -28,6 +29,14 @@ public class AuditLogServiceTest {
     public void listAll(){
         List<AuditLogEntity> list = auditLogService.list();
         CommonUtil.printList(list, 10);
+    }
+
+    @Test
+    public void listOther(){
+        LambdaQueryWrapper<AuditLogEntity> wrapper = new LambdaQueryWrapper<>(new AuditLogEntity())
+                .select(AuditLogEntity::getId, AuditLogEntity::getMethod, AuditLogEntity::getPath);
+        List<AuditLogEntity> list = auditLogService.list(wrapper);
+        CommonUtil.printList(list, 3);
     }
 
 }

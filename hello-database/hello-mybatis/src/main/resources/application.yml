@@ -31,7 +31,7 @@ spring:
           password: root
 logging:
   level:
-    com.yicj.mybatis.repository.mapper: info
+    com.yicj.mybatis.repository.mapper: debug
 mybatis-plus:
   global-config:
     db-config:
