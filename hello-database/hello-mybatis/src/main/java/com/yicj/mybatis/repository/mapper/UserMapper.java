@@ -3,6 +3,7 @@ package com.yicj.mybatis.repository.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.yicj.mybatis.repository.entity.UserEntity;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -14,6 +15,6 @@ import java.util.List;
 public interface UserMapper extends BaseMapper<UserEntity> {
 
 
-    Integer insertBatchSomeColumn(List<UserEntity> entity) ;
+    Integer insertBatchSomeColumn(@Param("list") List<UserEntity> list) ;
 
 }
