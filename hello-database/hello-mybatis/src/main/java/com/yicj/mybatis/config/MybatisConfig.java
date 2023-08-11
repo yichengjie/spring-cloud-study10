@@ -3,11 +3,15 @@ package com.yicj.mybatis.config;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.core.injector.AbstractMethod;
 import com.baomidou.mybatisplus.core.injector.DefaultSqlInjector;
+import com.baomidou.mybatisplus.core.injector.methods.SelectById;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.extension.injector.methods.InsertBatchSomeColumn;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.handler.TenantLineHandler;
 import com.baomidou.mybatisplus.extension.plugins.inner.*;
+import com.yicj.mybatis.support.methods.DeleteAll;
+import com.yicj.mybatis.support.methods.MyInsertAll;
+import com.yicj.mybatis.support.methods.MysqlInsertAllBatch;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.LongValue;
 import org.springframework.context.annotation.Bean;
@@ -52,6 +56,10 @@ public class MybatisConfig {
             List<AbstractMethod> methodList = super.getMethodList(mapperClass, tableInfo);
             // 将批量insert方法添加进去
             methodList.add(new InsertBatchSomeColumn()) ;
+            methodList.add(new DeleteAll()) ;
+            methodList.add(new MyInsertAll()) ;
+            methodList.add(new MysqlInsertAllBatch()) ;
+            methodList.add(new SelectById()) ;
             return methodList ;
         }
     }
