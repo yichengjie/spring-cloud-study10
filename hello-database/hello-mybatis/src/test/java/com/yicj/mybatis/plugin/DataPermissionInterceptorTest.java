@@ -44,6 +44,7 @@ public class DataPermissionInterceptorTest {
             try {
                 String sqlSegment = sqlSegmentMap.get(mappedStatementId);
                 Expression sqlSegmentExpression = CCJSqlParserUtil.parseCondExpression(sqlSegment);
+                // 拼接where原来的条件
                 if (null != where) {
                     System.out.println("原 where : " + where.toString());
                     if (mappedStatementId.equals(TEST_4)) {
