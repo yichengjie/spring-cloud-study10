@@ -2,6 +2,7 @@ package com.yicj.mybatis.repository.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -25,6 +26,9 @@ public class UserEntity {
     private String job ;
 
     private String company ;
+
+    @TableLogic
+    private Integer delFlag ;
 
     /**
      * 创建时间

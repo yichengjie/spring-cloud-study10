@@ -1,4 +1,4 @@
-package com.yicj.mybatis.repository.mapper;
+package com.yicj.mybatis.plugin;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -6,6 +6,7 @@ import com.yicj.mybatis.MybatisApplication;
 import com.yicj.mybatis.model.dto.StudentDetailDTO;
 import com.yicj.mybatis.model.form.ListStudentForm;
 import com.yicj.mybatis.repository.entity.StudentEntity;
+import com.yicj.mybatis.repository.mapper.StudentMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
