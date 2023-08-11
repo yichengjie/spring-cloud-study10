@@ -34,7 +34,7 @@ public class MybatisConfig {
         //动态表名插件
         interceptor.addInnerInterceptor(dynamicTableNamePlusInterceptor());
         //数据变动记录插件
-        //interceptor.addInnerInterceptor(new DataChangeRecorderInnerInterceptor());
+        interceptor.addInnerInterceptor(new DataChangeRecorderInnerInterceptor());
         return interceptor;
     }
 

@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
+ * 批量插入
  * @author: yicj
  * @date: 2023/8/11 16:21
  */

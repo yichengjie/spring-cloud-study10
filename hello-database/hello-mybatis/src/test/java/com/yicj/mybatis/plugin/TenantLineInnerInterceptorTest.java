@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 /**
+ * 租户字段
  * @author: yicj
  * @date: 2023/8/11 14:55
  */

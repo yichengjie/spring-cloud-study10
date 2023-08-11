@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**
+ * 数据变化日志打印
  * @author: yicj
  * @date: 2023/8/11 14:25
  */

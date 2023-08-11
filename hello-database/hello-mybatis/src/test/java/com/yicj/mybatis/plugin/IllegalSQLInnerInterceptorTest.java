@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.inner.IllegalSQLInnerIntercept
 import org.junit.jupiter.api.Test;
 
 /**
+ * 非法sql
  * @author: yicj
  * @date: 2023/8/11 15:12
  */

@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.HashMap;
 
 /**
+ * 动态表名称
  * @author: yicj
  * @date: 2023/8/11 12:48
  */

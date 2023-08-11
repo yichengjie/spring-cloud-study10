@@ -1,8 +1,13 @@
 package com.yicj.mybatis.repository.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.time.LocalDateTime;
+
 
 /**
  * @author: yicj
@@ -20,5 +25,32 @@ public class UserEntity {
     private String job ;
 
     private String company ;
+
+    /**
+     * 创建时间
+     */
+    // 注意！这里需要标记为填充字段
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime createTime ;
+
+    /**
+     * 创建人
+     */
+    @TableField(fill = FieldFill.INSERT)
+    private String createBy ;
+
+
+
+    /**
+     * 创建时间
+     */
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime modifyTime ;
+
+    /**
+     * 创建人
+     */
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private String modifyBy ;
 
 }
