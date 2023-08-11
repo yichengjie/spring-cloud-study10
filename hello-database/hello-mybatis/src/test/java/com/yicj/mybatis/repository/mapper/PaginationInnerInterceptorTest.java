@@ -18,7 +18,7 @@ import java.util.stream.IntStream;
  */
 @Slf4j
 @SpringBootTest(classes = MybatisApplication.class)
-public class StudentMapperTest {
+public class PaginationInnerInterceptorTest {
 
     @Autowired
     private StudentMapper studentMapper ;
