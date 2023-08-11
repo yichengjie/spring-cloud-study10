@@ -6,9 +6,9 @@ import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import mybatis.mate.annotation.FieldEncrypt;
 
 import java.time.LocalDateTime;
-
 
 /**
  * @author: yicj
@@ -25,6 +25,7 @@ public class UserEntity {
 
     private String job ;
 
+    @FieldEncrypt
     private String company ;
 
     @TableLogic
