@@ -48,7 +48,7 @@
             <scope>compile</scope>
         </dependency>
 
-        <dependency>
+      <!--  <dependency>
             <groupId>org.jasypt</groupId>
             <artifactId>jasypt</artifactId>
         </dependency>
@@ -57,7 +57,7 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-mate-starter</artifactId>
         </dependency>
-
+-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
