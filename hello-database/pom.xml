@@ -19,6 +19,7 @@
     <modules>
         <module>hello-jdbc</module>
         <module>hello-mybatis</module>
+        <module>hello-jsqlparser</module>
     </modules>
     <packaging>pom</packaging>
 

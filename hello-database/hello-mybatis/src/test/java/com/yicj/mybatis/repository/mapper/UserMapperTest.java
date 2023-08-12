@@ -67,5 +67,22 @@ public class UserMapperTest {
         page.getRecords().forEach(item -> log.info("item : {}", item));
     }
 
+    @Test
+    void findByUserId(){
+        Integer userId = 1 ;
+        UserEntity userEntity = userMapper.findByUserId(userId);
+        log.info("user entity: {}", userEntity);
+    }
+
+    @Test
+    void listByMultiParam(){
+        Integer id = 1 ;
+        String name = "张三";
+        String job = "student" ;
+        String company = "test" ;
+        String createBy = "yicj" ;
+        List<UserEntity> list = userMapper.listByMultiParam(id, name, job, company, createBy);
+        CommonUtil.printList(list, 10);
+    }
 
 }
