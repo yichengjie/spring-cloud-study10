@@ -4,6 +4,8 @@ import com.yicj.minio.properties.MinioProperties;
 import io.minio.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.io.File;
 import java.io.InputStream;
 
 /**
@@ -27,6 +29,8 @@ public class MinioService {
      * @throws Exception
      */
     public String upload(String localPath, String remotePath) throws Exception {
+
+
         UploadObjectArgs uploadObjectArgs = UploadObjectArgs.builder()
                 .bucket(minioProperties.getBucketName())
                 .object(localPath)

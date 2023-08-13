@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 //@Component
 //@PropertySource(value = "classpath:minio.yml"
 //        , encoding = "UTF-8")
+@PropertySource(value = {"classpath:minio.properties"})
 @ConfigurationProperties(prefix = "minio")
 public class MinioProperties {
 
