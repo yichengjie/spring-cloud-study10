@@ -1,3 +1,7 @@
+server:
+  port: 7070
+  servlet:
+    context-path: /hello-gateway
 spring:
   application:
     name: gateway-app
@@ -8,9 +12,6 @@ spring:
       config:
         server-addr: 127.0.0.1:8848
         file-extension: yaml
-
-server:
-  port: 7070
 management:
   endpoints:
     web:

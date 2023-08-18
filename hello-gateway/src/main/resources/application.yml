@@ -1,4 +1,11 @@
+# 将这段配置放入nacos配置文件gateway-app.yaml中，可以实现动态路由效果
 spring:
   cloud:
     gateway:
       routes:
+        - id: blog
+          uri: https://blog.csdn.net
+          predicates:
+            - Path=/blog/**
+          filters:
+            - StripPrefix=1

@@ -15,6 +15,7 @@
         <module>hello-database</module>
         <module>hello-minio</module>
         <module>hello-gateway</module>
+        <module>hello-nacos-client</module>
     </modules>
 
     <properties>
