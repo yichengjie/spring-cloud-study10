@@ -1,0 +1,15 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /hello-sentinel-client
+spring:
+  application:
+    name: nacos-client-app
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+feign:
+  sentinel:
+    enabled: true
+### open feign fallback如果没有hystrix则不会自动调用fallback验证 ？？？

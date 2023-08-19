@@ -16,6 +16,7 @@
         <module>hello-minio</module>
         <module>hello-gateway</module>
         <module>hello-nacos-client</module>
+        <module>hello-sentinel-client</module>
     </modules>
 
     <properties>
