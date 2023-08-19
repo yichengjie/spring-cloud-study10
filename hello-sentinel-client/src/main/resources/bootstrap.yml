@@ -9,7 +9,7 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
-feign:
-  sentinel:
-    enabled: true
-### open feign fallback如果没有hystrix则不会自动调用fallback验证 ？？？
+# 如果不打开feign的fallback降级配置，报错时将直接抛出错误信息
+#feign:
+#  sentinel:
+#    enabled: true

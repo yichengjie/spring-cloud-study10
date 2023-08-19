@@ -18,4 +18,10 @@ public class HelloController {
         return "hello nacos client index !" ;
     }
 
+
+    @GetMapping("/exception")
+    public String exception(){
+        throw new RuntimeException("测试nacos client异常！") ;
+    }
+
 }
