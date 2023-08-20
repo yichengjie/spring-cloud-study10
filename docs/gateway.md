@@ -1,0 +1,1 @@
+1. curl --dump-header - --header 'Host: www.circuitbreaker.com' http://localhost:8080/delay/3
