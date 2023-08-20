@@ -9,9 +9,10 @@ import reactor.core.publisher.Mono;
  * @date: 2023/8/20 10:15
  */
 @RestController
+@RequestMapping("/fallback")
 public class HelloFallbackController {
 
-    @RequestMapping("/fallback")
+    @RequestMapping("/index")
     public Mono<String> fallback() {
         return Mono.just("fallback");
     }

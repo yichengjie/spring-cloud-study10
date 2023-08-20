@@ -26,10 +26,14 @@ public class GatewayConfig {
                         .filters(f -> f
                                 .circuitBreaker(config -> config
                                 .setName("mycmd")
-                                .setFallbackUri("forward:/fallback")
+                                .setFallbackUri("forward:/fallback/index")
                         ))
-                        .uri("http://httpbin.org:80")).
-                build();
+                        .uri("http://httpbin.org:80"))
+//                .route(p -> p
+//                        .path("/fallback")
+//                        .filters(f -> f.stripPrefix(1))
+//                        .uri("http://localhost:8080/fallback"))
+                .build();
     }
 
 }
