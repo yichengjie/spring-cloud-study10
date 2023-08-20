@@ -1,17 +1,17 @@
 server:
-  port: 7070
+  port: 8080
   servlet:
     context-path: /hello-gateway
 spring:
   application:
     name: gateway-app
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 127.0.0.1:8848
-      config:
-        server-addr: 127.0.0.1:8848
-        file-extension: yaml
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: 127.0.0.1:8848
+#      config:
+#        server-addr: 127.0.0.1:8848
+#        file-extension: yaml
 management:
   endpoints:
     web:
