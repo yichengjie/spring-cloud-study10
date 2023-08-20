@@ -1,10 +1,6 @@
-server:
-  port: 8080
-  servlet:
-    context-path: /hello-gateway
 spring:
-  application:
-    name: gateway-app
+  profiles:
+    active: filter
 #  cloud:
 #    nacos:
 #      discovery:

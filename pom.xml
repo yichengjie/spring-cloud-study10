@@ -18,6 +18,7 @@
         <module>hello-nacos-client</module>
         <module>hello-sentinel-client</module>
         <module>hello-resilience4j</module>
+        <module>hello-webmvc</module>
     </modules>
 
     <properties>

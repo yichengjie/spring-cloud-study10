@@ -1,0 +1,13 @@
+### 缓存body
+GET http://localhost:8080/hello-webmvc/hello/index
+
+
+### 缓存body
+POST http://localhost:8080/hello-webmvc/hello/downstream
+Content-Type: application/json
+
+{
+  "username": "yicj",
+  "address": "bjs"
+}
+

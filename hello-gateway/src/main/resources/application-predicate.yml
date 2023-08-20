@@ -1,0 +1,46 @@
+# 将这段配置放入nacos配置文件gateway-app.yaml中，可以实现动态路由效果
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: blog
+          uri: https://blog.csdn.net
+          predicates:
+            - Path=/blog/**
+          filters:
+            #- StripPrefix=1
+            - name: StripPrefix
+              args:
+                parts: 1
+        - id: add_request_parameter_route
+          uri: https://example.org
+          predicates:
+            - Path=/add_request_parameter_route
+          filters:
+            - AddRequestParameter=red, blue
+            - AddResponseHeader=X-Response-Red, Blue
+            - StripPrefix=1
+        - id: add_response_header_route
+          uri: https://example.org
+          predicates:
+            - Host=**.somehost.org,**.anotherhost.org
+          filters:
+            - AddResponseHeader=foo, bar-www
+        - id: template_path_route
+          uri: https://example.org
+          predicates:
+            - Path=/red/{segment},blue/{segment}
+          filters:
+            - StripPrefix=2
+        - id: query_route
+          uri: https://example.org
+          predicates:
+            - Query=green
+        - id: query_route2
+          uri: https://example.org
+          predicates:
+            - Query=red, gree.
+        - id: xforwarded_remoteaddr_route
+          uri: https://example.org
+          predicates:
+            - XForwardedRemoteAddr=192.168.1.1/24

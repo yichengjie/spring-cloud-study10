@@ -4,4 +4,4 @@
 ```convertToRoute -> getFilters -> loadGatewayFilters```
 2. ConfigurationService
 ```with(GatewayFilterFactory factory) ->  ```
-3. 
+3. RouteToRequestUrlFilter

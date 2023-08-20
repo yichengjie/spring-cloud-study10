@@ -1,0 +1,23 @@
+# 将这段配置放入nacos配置文件gateway-app.yaml中，可以实现动态路由效果
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: add_request_header_route
+          uri: https://example.org
+          predicates:
+            - Path=/red/{segment}
+          filters:
+            #- AddRequestHeader=X-Request-red, Blue-{segment}
+            - AddRequestHeader=X-Request-Red, blue
+            - AddRequestParameter=red, blue
+            - AddResponseHeader=X-Response-Red, Blue
+            - StripPrefix=2
+        - id: cache_request_body_route
+          uri: http://localhost:8083
+          predicates:
+            - Path=/hello-webmvc/**
+          filters:
+            - name: CacheRequestBody
+              args:
+                bodyClass: java.lang.String
