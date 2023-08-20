@@ -8,4 +8,7 @@ spring:
           predicates:
             - Path=/blog/**
           filters:
-            - StripPrefix=1
+            #- StripPrefix=1
+            - name: StripPrefix
+              args:
+                parts: 1

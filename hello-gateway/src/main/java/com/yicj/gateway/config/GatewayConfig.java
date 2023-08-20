@@ -25,9 +25,9 @@ public class GatewayConfig {
                         .host("*.circuitbreaker.com")
                         .filters(f -> f
                                 .circuitBreaker(config -> config
-                                .setName("mycmd")
-                                .setFallbackUri("forward:/fallback/index")
-                        ))
+                                        .setName("mycmd")
+                                        .setFallbackUri("forward:/fallback/index")
+                                ))
                         .uri("http://httpbin.org:80"))
 //                .route(p -> p
 //                        .path("/fallback")
