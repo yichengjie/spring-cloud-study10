@@ -17,6 +17,7 @@
         <module>hello-gateway</module>
         <module>hello-nacos-client</module>
         <module>hello-sentinel-client</module>
+        <module>hello-resilience4j</module>
     </modules>
 
     <properties>
