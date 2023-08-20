@@ -6,11 +6,11 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @EnableFeignClients
 @SpringBootApplication
-public class SentinelApplication {
+public class SentinelClientApplication {
 
     public static void main(String[] args) {
 
-        SpringApplication.run(SentinelApplication.class, args) ;
+        SpringApplication.run(SentinelClientApplication.class, args) ;
     }
 
 }

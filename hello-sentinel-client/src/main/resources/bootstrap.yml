@@ -4,12 +4,16 @@ server:
     context-path: /hello-sentinel-client
 spring:
   application:
-    name: nacos-client-app
+    name: sentinel-client-app
   cloud:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8858
+        port: 8719
 # 如果不打开feign的fallback降级配置，报错时将直接抛出错误信息
-#feign:
-#  sentinel:
-#    enabled: true
+feign:
+  sentinel:
+    enabled: true
