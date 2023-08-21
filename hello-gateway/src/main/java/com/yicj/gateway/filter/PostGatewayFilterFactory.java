@@ -9,6 +9,10 @@ import reactor.core.publisher.Mono;
 @Component
 public class PostGatewayFilterFactory extends AbstractGatewayFilterFactory<PostGatewayFilterFactory.Config> {
 
+    public PostGatewayFilterFactory(){
+        super(PostGatewayFilterFactory.Config.class);
+    }
+
     @Override
     public GatewayFilter apply(Config config) {
         // grab configuration from Config object

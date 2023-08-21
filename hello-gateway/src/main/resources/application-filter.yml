@@ -3,21 +3,26 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: add_request_header_route
-          uri: https://example.org
-          predicates:
-            - Path=/red/{segment}
-          filters:
-            #- AddRequestHeader=X-Request-red, Blue-{segment}
-            - AddRequestHeader=X-Request-Red, blue
-            - AddRequestParameter=red, blue
-            - AddResponseHeader=X-Response-Red, Blue
-            - StripPrefix=2
+#        - id: add_request_header_route
+#          uri: https://example.org
+#          predicates:
+#            - Path=/red/{segment}
+#          filters:
+#            #- AddRequestHeader=X-Request-red, Blue-{segment}
+#            - AddRequestHeader=X-Request-Red, blue
+#            - AddRequestParameter=red, blue
+#            - AddResponseHeader=X-Response-Red, Blue
+#            - StripPrefix=2
         - id: cache_request_body_route
           uri: http://localhost:8083
           predicates:
             - Path=/hello-webmvc/**
           filters:
-            - name: CacheRequestBody
+            - name: Custom
               args:
-                bodyClass: java.lang.String
+                message: My Custom Message
+                preLogger: true
+                postLogger: true
+#            - name: CacheRequestBody
+#              args:
+#                bodyClass: java.lang.String

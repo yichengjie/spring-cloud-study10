@@ -9,8 +9,11 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 @Component
-public class PreGatewayFilterFactory  extends AbstractGatewayFilterFactory<PreGatewayFilterFactory.Config> {
+public class PreGatewayFilterFactory extends AbstractGatewayFilterFactory<PreGatewayFilterFactory.Config> {
 
+    public PreGatewayFilterFactory(){
+        super(PreGatewayFilterFactory.Config.class);
+    }
 
     @Override
     public GatewayFilter apply(Config config) {
@@ -26,7 +29,6 @@ public class PreGatewayFilterFactory  extends AbstractGatewayFilterFactory<PreGa
 
 
     class PreGatewayFilter implements GatewayFilter{
-
         @Override
         public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
             return null;
@@ -34,7 +36,6 @@ public class PreGatewayFilterFactory  extends AbstractGatewayFilterFactory<PreGa
     }
 
     public static class Config{
-
     }
 
 }
