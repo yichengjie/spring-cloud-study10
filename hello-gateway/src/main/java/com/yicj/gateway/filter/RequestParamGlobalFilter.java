@@ -1,6 +1,7 @@
 package com.yicj.gateway.filter;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -62,10 +63,11 @@ public class RequestParamGlobalFilter implements GlobalFilter, Ordered {
 //                            .header("Content-Type", "application/json")
 //                            .body(Mono.just(DataBufferUtils.createByteBuffer(body.getBytes())))).build());
 //                });
-
-        return null ;
+        exchange.getRequest()
+                .mutate()
+                .header("x-token", "hello-world") ;
+        return chain.filter(exchange) ;
     }
-
 
     /**
      * ReadJsonBody
