@@ -1,13 +1,13 @@
 package com.yicj.study.mvc.controller;
 
 import com.yicj.study.mvc.model.form.HelloIndexForm;
+import com.yicj.study.mvc.utils.CommonUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.servlet.support.RequestContextUtils;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
 
 @Slf4j
 @RestController
@@ -28,11 +28,23 @@ public class HelloController {
     @PostMapping("/downstream")
     public HelloIndexForm downstream(@RequestBody HelloIndexForm form){
         servletRequest.getHeader("x-token") ;
-        HttpServletRequest request =
-                ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest() ;
-        String token = request.getHeader("x-token");
+        //HttpServletRequest request = CommonUtils.getHttpServletRequest() ;
+        HttpServletRequest proxy = CommonUtils.getHttpServletRequestProxy(this.getClass().getClassLoader());
+        String token = proxy.getHeader("x-token");
         log.info("===> x token : {}", token);
         return form ;
+    }
+
+
+
+
+    class HttpServletRequestInvocationHandler implements InvocationHandler{
+        @Override
+        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+            HttpServletRequest request = CommonUtils.getHttpServletRequest() ;
+            return method.invoke(request, args) ;
+            //return InvocationHandler.invokeDefault(request, method, args);
+        }
     }
 
 }

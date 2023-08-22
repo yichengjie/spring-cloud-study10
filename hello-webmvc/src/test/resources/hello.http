@@ -4,6 +4,8 @@ GET http://localhost:8083/hello-webmvc/hello/index
 ### downstream
 POST http://localhost:8083/hello-webmvc/hello/downstream
 Content-Type: application/json
+x-token: hello world token
+
 
 {
 "username": "yicj",
