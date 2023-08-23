@@ -69,7 +69,7 @@ public class FluxTest {
         }).subscribe(result ->{
             log.info("------> {}", result);
         });
-
+        log.info("------------------------------");
         //测试二，结果 1 2 3 4，因为考虑Flux.just(true,false,false)
         //的第一个值true
         Flux.fromArray(fwArray).filterWhen(item ->{
@@ -77,8 +77,7 @@ public class FluxTest {
         }).subscribe(result ->{
             log.info("------> {}", result);
         });
-
-
+        log.info("------------------------------");
         //测试三，结果空，因为考虑Flux.just(false, true, false)
         //的第一个值false
         Flux.fromArray(fwArray).filterWhen(item ->{
@@ -96,6 +95,41 @@ public class FluxTest {
     }
 
 
+    @Test
+    public void switchIfEmpty(){
+        Flux<Integer> flux = Flux.just(1, 2, 3, 4);
+        flux.switchIfEmpty(Flux.just(7,8,9))
+                .flatMap(item -> Mono.just(item))
+                .subscribe(item -> log.info("item : {}", item)) ;
+    }
+
+    @Test
+    public void switchIfEmpty2(){
+        Flux<Integer> flux = Flux.just(1, 2, 3, 4);
+        flux.flatMap(item -> Mono.just(item))
+            // 注意这里switchIfEmpty 和 flatMap顺序问题
+            .flatMap(item -> Mono.empty())
+            .switchIfEmpty(Flux.just(7,8,9))
+            .subscribe(item -> log.info("item : {}", item)) ;
+    }
+
+
+    @Test
+    public void switchIfEmpty3(){
+        Flux<Integer> flux = Flux.empty();
+        flux.flatMap(item -> Mono.just(item))
+                .switchIfEmpty(Flux.just(7,8,9))
+                .subscribe(item -> log.info("item : {}", item)) ;
+    }
+
+
+    @Test
+    public void switchIfEmpty4(){
+        Flux<Integer> flux = Flux.empty();
+        flux.switchIfEmpty(Flux.just(7,8,9))
+                .flatMap(item -> Mono.just(item))
+                .subscribe(item -> log.info("item : {}", item)) ;
+    }
 
     private <R> Mono<R> createNotFoundError() {
         return Mono.defer(() -> {
