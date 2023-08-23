@@ -57,6 +57,46 @@ public class FluxTest {
         Thread.sleep(2000);
     }
 
+
+    @Test
+    public void filterWhen(){
+//        Flux<Integer> flux = Flux.just(10,11,12,9).filterWhen(item -> Mono.just(item > 10));
+//        flux.subscribe(item -> log.info("value : {}", item)) ;
+        Integer[] fwArray = new Integer[]{1,2,3,4};
+
+        Flux.fromArray(fwArray).filterWhen(item ->{
+            return Mono.just(item % 2 == 0);
+        }).subscribe(result ->{
+            log.info("------> {}", result);
+        });
+
+        //测试二，结果 1 2 3 4，因为考虑Flux.just(true,false,false)
+        //的第一个值true
+        Flux.fromArray(fwArray).filterWhen(item ->{
+            return Flux.just(true, false, false);
+        }).subscribe(result ->{
+            log.info("------> {}", result);
+        });
+
+
+        //测试三，结果空，因为考虑Flux.just(false, true, false)
+        //的第一个值false
+        Flux.fromArray(fwArray).filterWhen(item ->{
+            return Flux.just(false, true, false);
+        }).subscribe(result ->{
+            log.info("------> {}", result);
+        });
+    }
+
+
+    @Test
+    public void filter(){
+        Flux<Integer> flux = Flux.just(10,11,12,9).filter(item -> item > 10);
+        flux.subscribe(item -> log.info("value : {}", item)) ;
+    }
+
+
+
     private <R> Mono<R> createNotFoundError() {
         return Mono.defer(() -> {
             Exception ex = new ResponseStatusException(HttpStatus.NOT_FOUND);
