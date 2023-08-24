@@ -3,6 +3,8 @@ package com.yicj.gateway.utils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.reactivestreams.Publisher;
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import java.time.LocalDateTime;
@@ -31,6 +33,28 @@ public class MonoTest {
         log.info("=========> init {}", LocalDateTime.now());
         TimeUnit.SECONDS.sleep(2);
         mono.subscribe(value -> log.info(" -> {}", value)) ;
+        mono.subscribe(new Subscriber<LocalDateTime>() {
+            @Override
+            public void onSubscribe(Subscription s) {
+                s.request(1);
+            }
+
+            @Override
+            public void onNext(LocalDateTime localDateTime) {
+                log.info("value : {}", localDateTime);
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                log.error("error : ", t);
+            }
+
+            @Override
+            public void onComplete() {
+                log.info("on complete");
+            }
+        });
+        
     }
 
     @Test
