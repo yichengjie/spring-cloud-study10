@@ -82,18 +82,11 @@ public class FluxTest {
         //的第一个值false
         Flux.fromArray(fwArray).filterWhen(item ->{
             return Flux.just(false, true, false);
-        }).subscribe(result ->{
+        })
+        .subscribe(result ->{
             log.info("------> {}", result);
         });
     }
-
-
-    @Test
-    public void filter(){
-        Flux<Integer> flux = Flux.just(10,11,12,9).filter(item -> item > 10);
-        flux.subscribe(item -> log.info("value : {}", item)) ;
-    }
-
 
     @Test
     public void switchIfEmpty(){
