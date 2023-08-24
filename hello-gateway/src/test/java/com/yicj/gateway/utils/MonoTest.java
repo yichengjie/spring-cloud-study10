@@ -24,6 +24,15 @@ public class MonoTest {
         mono.subscribe(value -> log.info(" -> {}", value)) ;
     }
 
+    // fromSupplier 与 defer 都能实现延迟执行的作用，只不过如参不一样
+    @Test
+    public void fromSupplier() throws InterruptedException {
+        Mono<LocalDateTime> mono = Mono.fromSupplier(LocalDateTime::now);
+        log.info("=========> init {}", LocalDateTime.now());
+        TimeUnit.SECONDS.sleep(2);
+        mono.subscribe(value -> log.info(" -> {}", value)) ;
+    }
+
     @Test
     public void filterWhen(){
         Integer value = 11 ;
