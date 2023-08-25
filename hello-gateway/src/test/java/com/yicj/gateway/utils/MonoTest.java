@@ -54,7 +54,7 @@ public class MonoTest {
                 log.info("on complete");
             }
         });
-        
+
     }
 
     @Test
