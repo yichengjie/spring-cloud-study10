@@ -11,6 +11,7 @@ import reactor.core.publisher.Mono;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
@@ -114,6 +115,16 @@ public class FluxTest {
         .subscribe(result ->{
             log.info("------> {}", result);
         });
+    }
+
+    @Test
+    public void buffer(){
+        Flux<Integer> flux = Flux.just(1, 2, 3, 4, 5, 6, 7, 8);
+        List<Integer> list = flux.buffer(3).blockFirst();
+        log.info("list : {}", list);
+        //
+        Integer blockFirst = flux.blockFirst();
+        log.info("blockFirst : {}", blockFirst);
     }
 
     @Test
