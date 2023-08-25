@@ -11,3 +11,7 @@ x-token: hello world token
 "username": "yicj",
 "address": "bjs"
 }
+
+
+### hello async
+GET http://localhost:8083/hello-webmvc/hello/async/hello
