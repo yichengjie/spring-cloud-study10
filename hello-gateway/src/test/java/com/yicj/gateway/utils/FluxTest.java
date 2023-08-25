@@ -9,6 +9,8 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
@@ -27,6 +29,32 @@ public class FluxTest {
         System.out.println("-------------");
         flux.concatMap(Flux::just)
                 .subscribe(item -> log.info("===== {}", item)) ;
+    }
+
+    @Test
+    public void reduceWith(){
+        Flux<String> flux = Flux.just("学生1", "学生2", "学生3", "学生4", "学生5");
+        flux.reduceWith(ArrayList::new, (list, item) ->{
+            list.add(item) ;
+            return list ;
+        }).subscribe(item -> log.info("item value : {}",item)) ;
+    }
+
+
+    @Test
+    public void reduce(){
+        Flux<String> flux = Flux.just("学生1", "学生2", "学生3", "学生4", "学生5");
+        flux.reduce((a,b) -> a +b)
+                .subscribe(item -> log.info("item : {}", item)) ;
+    }
+
+    @Test
+    public void reduceWithInitialValue(){
+        Flux<String> flux = Flux.just("学生1", "学生2", "学生3", "学生4", "学生5");
+        flux.reduce(new ArrayList<>(),(list,item) -> {
+            list.add(item) ;
+            return list ;
+        }).subscribe(item -> log.info("item : {}", item)) ;
     }
 
     @Test
