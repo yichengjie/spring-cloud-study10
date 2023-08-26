@@ -9,12 +9,9 @@ import org.springframework.cloud.gateway.route.RouteDefinitionLocator;
 import org.springframework.cloud.gateway.route.RouteDefinitionWriter;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
-import org.springframework.context.event.ApplicationEventMulticaster;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.stylesheets.LinkStyle;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
 import java.util.List;
 
 @Service
@@ -54,15 +51,14 @@ public class DynamicRouteServiceImpl
         //2. 讲list中路由信息都添加进去
         return routeDefinitionLocator.getRouteDefinitions()
                 .map(RouteDefinition::getId)
-                .doOnNext(id -> routeDefinitionWriter.delete(Mono.just(id)))
+                .flatMap(id -> routeDefinitionWriter.delete(Mono.just(id)))
                 .thenMany(Flux.fromIterable(list))
-                .doOnNext(item -> {
+                .map(item -> {
                     routeDefinitionWriter.save(Mono.just(item)) ;
-                }).doOnComplete(this::publishEvent)
-                .then()
-        ;
+                    return item ;
+                })
+                .then(Mono.fromRunnable(this::publishEvent));
     }
-
 
     @Override
     public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {

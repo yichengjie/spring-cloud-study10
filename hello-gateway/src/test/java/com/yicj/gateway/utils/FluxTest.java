@@ -140,37 +140,49 @@ public class FluxTest {
     @Test
     public void doOnNext2() throws InterruptedException {
         Flux<Integer> flux = Flux.just(1, 2, 3, 4, 5, 6, 7, 8);
-        flux.flatMap(item -> Mono.defer(() -> {
+        flux
+        .flatMap(item -> Mono.defer(() -> {
             log.info("value :{}", item) ;
             return Mono.just(item) ;
         }))
+        .then()
         //.then(Mono.fromRunnable(() -> log.info("then void value !!!")))
         .thenMany(Flux.fromIterable(Arrays.asList(11,12,13)))
         .subscribe(item -> log.info("item : {}", item)) ;
-        Thread.sleep(1000);
     }
+
 
 
     @Test
     public void complex() throws InterruptedException {
-        Flux<Integer> flux = Flux.just(1, 2, 3, 4, 5, 6, 7, 8);
-//        flux.map(String::valueOf)
-        flux.doOnNext(id -> Mono.fromRunnable(() -> log.info("delete by id : {}", id)))
-        .thenMany(Flux.fromIterable(Arrays.asList(11,12,13)))
-        .doOnNext(item -> Mono.fromRunnable(() -> log.info("save by id : {}", item)))
-        .doOnComplete(() -> log.info("complete do clean"))
-        .then()
-        .subscribe();
-        Thread.sleep(1000);
+        Flux.just(1, 2, 3, 4, 5, 6, 7, 8)
+                .map(String::valueOf)
+                // 这里的doOnNext 中的函数不会被执行
+                .doOnNext(item -> Mono.fromRunnable(() -> log.info("do on next : {}", item)))
+                .flatMap(id -> Mono.fromRunnable(() -> log.info("delete by id : {}", id)))
+                .thenMany(Flux.fromIterable(Arrays.asList(11,12,13)))
+                .flatMap(item -> Mono.fromCallable(() -> {
+                    log.info("save by id : {}", item) ;
+                    return item ;
+                }))
+                .doOnComplete(() -> log.info("complete do clean"))
+                .subscribe(value -> log.info("value : {}", value));
     }
 
-    // .map(RouteDefinition::getId)
-    //                .doOnNext(id -> routeDefinitionWriter.delete(Mono.just(id)))
-    //                .thenMany(Flux.fromIterable(list))
-    //                .doOnNext(item -> {
-    //                    routeDefinitionWriter.save(Mono.just(item)) ;
-    //                }).doOnComplete(this::publishEvent)
-    //                .then()
+    @Test
+    public void complex2() throws InterruptedException {
+        Flux.just(1, 2, 3, 4, 5, 6, 7, 8)
+                .map(String::valueOf)
+                .flatMap(id -> Mono.fromRunnable(() -> log.info("delete by id : {}", id)))
+                .thenMany(Flux.fromIterable(Arrays.asList(11,12,13)))
+                .flatMap(item -> Mono.fromCallable(() -> {
+                    log.info("save by id : {}", item) ;
+                    return item ;
+                }))
+                .doOnComplete(() -> log.info("complete do clean"))
+                .then()
+                .subscribe(value -> log.info("value : {}", value));
+    }
 
     @Test
     public void switchIfEmpty(){

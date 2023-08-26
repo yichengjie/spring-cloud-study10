@@ -72,6 +72,20 @@ public class MonoTest {
         mono.subscribe(item -> log.info("value : {}", item)) ;
     }
 
+
+    @Test
+    public void then(){
+        Mono.defer(() -> Mono.just(1))
+                .map(item -> {
+                    log.info("item : {}", item) ;
+                    return String.valueOf(item) ;
+                })
+                .then(Mono.fromRunnable(() -> log.info("save info ")))
+                .then(Mono.fromRunnable(() -> log.info("publish refresh event ")))
+                .subscribe()
+        ;
+    }
+
     @Test
     public void other() throws InterruptedException {
         Mono<LocalDateTime> mono = Mono.just(1)
