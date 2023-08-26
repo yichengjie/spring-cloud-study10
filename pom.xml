@@ -19,6 +19,7 @@
         <module>hello-sentinel-client</module>
         <module>hello-resilience4j</module>
         <module>hello-webmvc</module>
+        <module>hello-webflux</module>
     </modules>
 
     <properties>
