@@ -1,0 +1,8 @@
+# 这个地方独立配置, 是网关的数据, 代码 GatewayConfig.java 中读取被监听
+nacos:
+  gateway:
+    route:
+      config:
+        namespace: d03b2377-9a53-436a-88d6-d85a2e4c5307
+        group: DEFAULT_GROUP
+        data-id: hello-gateway-router.json

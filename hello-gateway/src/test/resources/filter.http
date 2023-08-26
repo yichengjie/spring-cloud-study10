@@ -11,3 +11,6 @@ Content-Type: application/json
   "address": "bjs"
 }
 
+### 调用nacos-cliet微服务
+GET http://localhost:8080/hello-gateway/hello-nacos-client/hello/index
+

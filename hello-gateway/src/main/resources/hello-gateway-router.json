@@ -1,0 +1,29 @@
+[
+  {
+    "id": "enacos-client-app",
+    "predicates": [
+      {
+        "args": {
+          "pattern": "/hello-gateway/hello-nacos-client/**"
+        },
+        "name": "Path"
+      }
+    ],
+    "uri": "lb://nacos-client-app",
+    "filters": [
+      {
+        "name": "AddResponseHeader",
+        "args":{
+          "name":"foo",
+          "value":"bar-www"
+        }
+      },
+      {
+        "name": "StripPrefix",
+        "args": {
+          "parts": "1"
+        }
+      }
+    ]
+  }
+]

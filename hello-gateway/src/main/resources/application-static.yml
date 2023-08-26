@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: nacos-client-app
+          uri: lb://nacos-client-app
+          predicates:
+            - Path=/hello-gateway/hello-nacos-client/**
+          filters:
+            - StripPrefix=2
