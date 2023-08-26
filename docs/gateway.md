@@ -22,5 +22,7 @@
 #### 执行流程
 1. FilteringWebHandler
 2. RouteToRequestUrlFilter
-3. NettyRoutingFilter
+3. ReactiveLoadBalancerClientFilter
+4. NettyRoutingFilter
+
 

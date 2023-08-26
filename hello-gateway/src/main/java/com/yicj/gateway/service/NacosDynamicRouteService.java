@@ -44,14 +44,14 @@ public class NacosDynamicRouteService {
         log.info("config content : {}", content);
         // 获取全部配置，并添加到路由配置中
         List<RouteDefinition> list = JSON.parseArray(content, RouteDefinition.class);
-        list.forEach(item -> dynamicRouteService.addRouteDefinition(item));
+        list.forEach(item -> dynamicRouteService.addRouteDefinition(item).subscribe());
 
         configService.addListener(dataId, group, new AbstractListener() {
             @Override
             public void receiveConfigInfo(String configInfo) {
                 log.info("接收到配置变化通知：{}", configInfo);
                 List<RouteDefinition> list = JSON.parseArray(content, RouteDefinition.class);
-                dynamicRouteService.addRouteDefinitionList(list) ;
+                dynamicRouteService.addRouteDefinitionList(list).subscribe() ;
             }
         });
     }

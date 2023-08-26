@@ -3,6 +3,6 @@ nacos:
   gateway:
     route:
       config:
-        namespace: d03b2377-9a53-436a-88d6-d85a2e4c5307
+        namespace: hello-spring-cloud
         group: DEFAULT_GROUP
         data-id: hello-gateway-router.json

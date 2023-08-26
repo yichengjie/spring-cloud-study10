@@ -2,6 +2,7 @@ package com.yicj.gateway.service.impl;
 
 
 import com.yicj.gateway.service.DynamicRouteService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.event.RefreshRoutesEvent;
 import org.springframework.cloud.gateway.route.RouteDefinition;
@@ -14,6 +15,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import java.util.List;
 
+@Slf4j
 @Service
 public class DynamicRouteServiceImpl
         implements DynamicRouteService, ApplicationEventPublisherAware {
@@ -67,6 +69,7 @@ public class DynamicRouteServiceImpl
 
 
     private void publishEvent(){
+        log.info("发布更新路由事件 !!!!");
         eventPublisher.publishEvent(new RefreshRoutesEvent(this)) ;
     }
 }

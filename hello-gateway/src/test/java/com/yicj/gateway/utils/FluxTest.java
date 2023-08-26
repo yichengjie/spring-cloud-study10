@@ -34,6 +34,35 @@ public class FluxTest {
     }
 
     @Test
+    public void next() throws Exception{
+        Flux.just("学生1", "学生2", "学生3", "学生4", "学生5")
+                .concatMap(item -> Mono.just(item).delayElement(Duration.ofMillis(200)))
+                .next()
+                .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND)))
+                .subscribe(item -> log.info("===== {}", item));
+        Thread.sleep(2000);
+    }
+
+    /**
+     * 仅将此通量发出的第一项发射到新的单声道中。
+     * @throws InterruptedException
+     */
+    @Test
+    public void next2() throws InterruptedException {
+        Flux.just("学生1", "学生2", "学生3", "学生4", "学生5")
+            .concatMap(item -> Mono.defer(() -> {
+                log.info("concat map item : {}", item);
+                if ("学生3".equals(item)){
+                    return Mono.just(item) ;
+                }else {
+                    return Mono.empty() ;
+                }
+            }))
+            .next()
+            .subscribe(item -> log.info("===== {}", item));
+    }
+
+    @Test
     public void reduceWith(){
         Flux<String> flux = Flux.just("学生1", "学生2", "学生3", "学生4", "学生5");
         flux.reduceWith(ArrayList::new, (list, item) ->{
@@ -76,16 +105,6 @@ public class FluxTest {
         Thread.sleep(2000);
     }
 
-
-    @Test
-    public void next() throws Exception{
-        Flux.just("学生1", "学生2", "学生3", "学生4", "学生5")
-                .concatMap(item -> Mono.just(item).delayElement(Duration.ofMillis(200)))
-                .next()
-                .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND)))
-                .subscribe(item -> log.info("===== {}", item));
-        Thread.sleep(2000);
-    }
 
 
     @Test
