@@ -6,3 +6,11 @@ server:
   # 注意在gateway中配置context-path不生效
   servlet:
     context-path: /hello-gateway
+logging:
+  level:
+    root: info
+    org.springframework.cloud.gateway: debug
+    org.springframework.http.server.reactive: debug
+    org.springframework.web.reactive: debug
+    org.springframework.boot.autoconfigure.web: debug
+    reactor.netty: debug

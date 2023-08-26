@@ -10,9 +10,7 @@ spring:
        file-extension: yaml
 management:
   endpoints:
-    gateway:
-      enable: true
     web:
       exposure:
-        include: '*'
+        include: gateway
 

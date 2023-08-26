@@ -26,7 +26,7 @@ public class DynamicRouteServiceImpl
     @Autowired
     private RouteDefinitionWriter routeDefinitionWriter ;
 
-    private ApplicationEventPublisher eventPublisher ;
+    private ApplicationEventPublisher publisher ;
 
     /**
      * 新增路由
@@ -43,7 +43,7 @@ public class DynamicRouteServiceImpl
     public Mono<Void> updateRouteDefinition(RouteDefinition routeDefinition) {
         // 执行删除, 然后保存，之后发布刷新事件
         return routeDefinitionWriter.delete(Mono.just(routeDefinition).map(RouteDefinition::getId))
-                .then(Mono.fromRunnable(() -> routeDefinitionWriter.save(Mono.just(routeDefinition))))
+                .then(routeDefinitionWriter.save(Mono.just(routeDefinition)))
                 .then(Mono.fromRunnable(this::publishEvent));
     }
 
@@ -64,12 +64,12 @@ public class DynamicRouteServiceImpl
 
     @Override
     public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
-        this.eventPublisher = applicationEventPublisher ;
+        this.publisher = applicationEventPublisher ;
     }
 
 
     private void publishEvent(){
         log.info("发布更新路由事件 !!!!");
-        eventPublisher.publishEvent(new RefreshRoutesEvent(this)) ;
+        this.publisher.publishEvent(new RefreshRoutesEvent(this));
     }
 }
