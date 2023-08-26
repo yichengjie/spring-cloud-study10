@@ -35,8 +35,8 @@ public class DynamicRouteServiceImpl
      */
     @Override
     public Mono<Void> addRouteDefinition(RouteDefinition routeDefinition){
-        return routeDefinitionWriter.save(Mono.just(routeDefinition)
-                .then(Mono.fromRunnable(this::publishEvent)));
+        return routeDefinitionWriter.save(Mono.just(routeDefinition))
+                .then(Mono.fromRunnable(this::publishEvent));
     }
 
     @Override
@@ -55,10 +55,7 @@ public class DynamicRouteServiceImpl
                 .map(RouteDefinition::getId)
                 .flatMap(id -> routeDefinitionWriter.delete(Mono.just(id)))
                 .thenMany(Flux.fromIterable(list))
-                .map(item -> {
-                    routeDefinitionWriter.save(Mono.just(item)) ;
-                    return item ;
-                })
+                .flatMap(item -> routeDefinitionWriter.save(Mono.just(item)))
                 .then(Mono.fromRunnable(this::publishEvent));
     }
 

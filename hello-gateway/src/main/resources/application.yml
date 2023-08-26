@@ -6,6 +6,17 @@ server:
   # 注意在gateway中配置context-path不生效
   servlet:
     context-path: /hello-gateway
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+    # 重点在这里,默认为false,所以没有gateway相关端点,打开后就可以访问
+    gateway:
+      enabled: true
 logging:
   level:
     root: info
