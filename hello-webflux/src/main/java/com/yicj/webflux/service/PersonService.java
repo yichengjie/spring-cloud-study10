@@ -1,6 +1,7 @@
 package com.yicj.webflux.service;
 
 import com.yicj.webflux.model.form.ListPersonForm;
+import com.yicj.webflux.model.form.SavePersonForm;
 import com.yicj.webflux.repository.entity.PersonEntity;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -11,7 +12,7 @@ import reactor.core.publisher.Mono;
  */
 public interface PersonService {
 
-    Mono<PersonEntity> save(PersonEntity entity) ;
+    Mono<PersonEntity> save(SavePersonForm entity) ;
 
     Mono<PersonEntity> findById(String id) ;
 
