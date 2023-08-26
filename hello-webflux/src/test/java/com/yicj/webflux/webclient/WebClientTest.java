@@ -25,6 +25,7 @@ import java.time.Duration;
 @Slf4j
 public class WebClientTest {
 
+    // 注意accept中的值与服务器端定义的值保持一直，否则会出现404
     @Test
     public void queryById(){
         String id = "0a990d690f39465384017a25d61fdec4" ;
