@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: filter
+    active: dynamic
    cloud:
     nacos:
       discovery:

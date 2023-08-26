@@ -128,6 +128,51 @@ public class FluxTest {
     }
 
     @Test
+    public void doOnNext(){
+        Flux<Integer> flux = Flux.just(1, 2, 3, 4, 5, 6, 7, 8);
+        flux.doOnNext(item -> {
+            log.info("value :{}", item) ;
+        }).then(Mono.fromRunnable(() -> {
+            log.info("then void value ....");
+        })).subscribe() ;
+    }
+
+    @Test
+    public void doOnNext2() throws InterruptedException {
+        Flux<Integer> flux = Flux.just(1, 2, 3, 4, 5, 6, 7, 8);
+        flux.flatMap(item -> Mono.defer(() -> {
+            log.info("value :{}", item) ;
+            return Mono.just(item) ;
+        }))
+        //.then(Mono.fromRunnable(() -> log.info("then void value !!!")))
+        .thenMany(Flux.fromIterable(Arrays.asList(11,12,13)))
+        .subscribe(item -> log.info("item : {}", item)) ;
+        Thread.sleep(1000);
+    }
+
+
+    @Test
+    public void complex() throws InterruptedException {
+        Flux<Integer> flux = Flux.just(1, 2, 3, 4, 5, 6, 7, 8);
+//        flux.map(String::valueOf)
+        flux.doOnNext(id -> Mono.fromRunnable(() -> log.info("delete by id : {}", id)))
+        .thenMany(Flux.fromIterable(Arrays.asList(11,12,13)))
+        .doOnNext(item -> Mono.fromRunnable(() -> log.info("save by id : {}", item)))
+        .doOnComplete(() -> log.info("complete do clean"))
+        .then()
+        .subscribe();
+        Thread.sleep(1000);
+    }
+
+    // .map(RouteDefinition::getId)
+    //                .doOnNext(id -> routeDefinitionWriter.delete(Mono.just(id)))
+    //                .thenMany(Flux.fromIterable(list))
+    //                .doOnNext(item -> {
+    //                    routeDefinitionWriter.save(Mono.just(item)) ;
+    //                }).doOnComplete(this::publishEvent)
+    //                .then()
+
+    @Test
     public void switchIfEmpty(){
         Flux<Integer> flux = Flux.just(1, 2, 3, 4);
         flux.switchIfEmpty(Flux.just(7,8,9))
