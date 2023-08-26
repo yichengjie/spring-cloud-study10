@@ -7,7 +7,7 @@ import org.springframework.web.server.ServerWebExchange;
 
 import java.util.function.Predicate;
 
-@Component
+//@Component
 public class MyRoutePredicateFactory extends AbstractRoutePredicateFactory<MyRoutePredicateFactory.Config> {
 
     public MyRoutePredicateFactory() {
