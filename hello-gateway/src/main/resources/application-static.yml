@@ -8,3 +8,9 @@ spring:
             - Path=/hello-gateway/hello-nacos-client/**
           filters:
             - StripPrefix=2
+#        - id: nacos-client-app
+#          uri: http://localhost:8081
+#          predicates:
+#            - Path=/hello-gateway/hello-nacos-client/**
+#          filters:
+#            - StripPrefix=2
