@@ -43,34 +43,33 @@ public class HelloHandler {
     }
 
     public Mono<ServerResponse> createPerson(ServerRequest serverRequest) {
-        // 上面这种写法会报错
-//        return serverRequest.bodyToMono(SavePersonForm.class)
-//                .map(form -> {
-//                    PersonEntity entity = new PersonEntity();
-//                    entity.setId(CommonUtil.uuid());
-//                    entity.setUsername(form.getUsername());
-//                    entity.setAddress(form.getAddress());
-//                    return entity ;
-//                })
-//                .flatMap(entity -> personService.save(entity))
-//                .flatMap(entity ->
-//                        ServerResponse.ok()
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .body(entity, PersonEntity.class)
-//                );
-        Mono<PersonEntity> entityMono = serverRequest.bodyToMono(SavePersonForm.class)
-            .map(form -> {
-                PersonEntity entity = new PersonEntity();
-                entity.setId(CommonUtil.uuid());
-                entity.setUsername(form.getUsername());
-                entity.setAddress(form.getAddress());
-                return entity;
-            })
-            .flatMap(entity -> personService.save(entity));
         return ServerResponse.ok()
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(entityMono, PersonEntity.class) ;
-
-
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(Mono.defer(() ->
+                serverRequest.bodyToMono(SavePersonForm.class)
+                .map(form -> {
+                    PersonEntity entity = new PersonEntity();
+                    entity.setId(CommonUtil.uuid());
+                    entity.setUsername(form.getUsername());
+                    entity.setAddress(form.getAddress());
+                    return entity ;
+                })
+                .flatMap(entity -> personService.save(entity))), PersonEntity.class
+            ) ;
+        // 下面这种写法也能正常运行
+//        return serverRequest.bodyToMono(SavePersonForm.class)
+//            .map(form -> {
+//                PersonEntity entity = new PersonEntity();
+//                entity.setId(CommonUtil.uuid());
+//                entity.setUsername(form.getUsername());
+//                entity.setAddress(form.getAddress());
+//                return entity ;
+//            })
+//            .flatMap(entity -> personService.save(entity))
+//            .flatMap(entity ->
+//                    ServerResponse.ok()
+//                    .contentType(MediaType.APPLICATION_JSON)
+//                    .body(Mono.just(entity), PersonEntity.class)
+//            );
     }
 }
