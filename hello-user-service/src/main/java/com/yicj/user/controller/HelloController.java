@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
 
 /**
  * @author yicj
@@ -16,9 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
 
     @GetMapping("/index")
-    public String index(@RequestHeader("x-token") String xtoken){
+    public Mono<String> index(
+            @RequestHeader(value = "x-token", required = false) String xtoken){
         log.info("x-token value : {}", xtoken);
-        return "user service hello index !" ;
+        return Mono.fromSupplier(() -> "user service hello index !") ;
     }
 
 }

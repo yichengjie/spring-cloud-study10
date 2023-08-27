@@ -26,6 +26,23 @@ public class MonoTest {
         mono.subscribe(value -> log.info(" -> {}", value)) ;
     }
 
+    @Test
+    public void deferContextual() {
+        Mono.just("Hello")
+            .flatMap(value -> Mono.deferContextual(ctx -> Mono.just(value + ", "+ ctx.get("name"))))
+            .contextWrite(ctx -> ctx.put("name", "World"))
+            .subscribe(value -> log.info("value : {}", value)) ;
+    }
+
+    @Test
+    public void zip(){
+        Mono<String> hello = Mono.just("hello");
+        Mono<String> world = Mono.just("World");
+        Mono.zip(hello, world, (v1, v2) -> v1 + ", " + v2)
+            .subscribe(value -> log.info("zip value : {}", value)) ;
+    }
+
+
     // fromSupplier 与 defer 都能实现延迟执行的作用，只不过如参不一样
     @Test
     public void fromSupplier() throws InterruptedException {

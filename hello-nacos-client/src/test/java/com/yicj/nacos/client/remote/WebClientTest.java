@@ -1,5 +1,6 @@
-package com.yicj.nacos.client;
+package com.yicj.nacos.client.remote;
 
+import com.yicj.nacos.client.NacosClientApplication;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,11 @@ public class WebClientTest {
 
     @Test
     public void retrieve() throws Exception{
-        String value = builder.build()
+        String value = builder
+                .baseUrl("http://hello-user-server/user-service")
+                .build()
                 .get()
-                .uri("http://hello-user-server/user-service/hello/index")
+                .uri("/hello/index")
                 //.uri("http://localhost:8085/user-service/hello/index")
                 .accept(MediaType.ALL)
                 .retrieve()
