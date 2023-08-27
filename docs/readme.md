@@ -8,4 +8,10 @@
     </dependency>
     ```
 4. 项目使用springdoc替代swagger组件
-5. 
+5. 如果需要负载均衡项目需要加入spring-cloud-starter-loadbalancer
+    ```xml
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+    </dependency>
+    ```
