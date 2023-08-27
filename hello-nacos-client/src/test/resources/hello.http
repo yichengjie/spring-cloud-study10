@@ -1,1 +1,4 @@
-http://localhost:8081/hello/index
+GET http://localhost:8081/hello/index
+
+### user service服务 index
+GET http://localhost:8081/hello/user/index

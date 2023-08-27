@@ -20,6 +20,7 @@
         <module>hello-resilience4j</module>
         <module>hello-webmvc</module>
         <module>hello-webflux</module>
+        <module>hello-user-service</module>
     </modules>
 
     <properties>
