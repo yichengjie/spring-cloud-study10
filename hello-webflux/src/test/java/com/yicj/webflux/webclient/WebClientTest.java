@@ -33,6 +33,7 @@ public class WebClientTest {
         PersonEntity entity = client.get()
                 .uri("/person/{id}", id)
                 .accept(MediaType.TEXT_PLAIN)
+                //.exchange()
                 .retrieve()
                 .bodyToMono(PersonEntity.class)
                 .block();
