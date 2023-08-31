@@ -1,0 +1,6 @@
+###测试无token 访问
+GET http://localhost:8080/add_request_parameter_route
+
+###测试有token 访问
+GET http://localhost:8080/add_request_parameter_route
+Authorization: 123

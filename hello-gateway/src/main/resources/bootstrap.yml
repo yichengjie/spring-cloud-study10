@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: dynamic
+    active: predicate
   cloud:
    nacos:
      discovery:
