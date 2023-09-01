@@ -50,7 +50,18 @@ public class WebClientTest {
                 .bodyToFlux(PersonEntity.class)
                 .subscribe(entity -> log.info("id: {}, username: {}, address: {}", entity.getId(), entity.getUsername(), entity.getAddress()));
         Thread.sleep(2000);
+    }
 
+
+    @Test
+    public void ex() throws InterruptedException {
+        WebClient client = WebClient.create("http://localhost:8084");
+        client.get()
+                .uri("/person")
+                .accept(MediaType.TEXT_PLAIN)
+                .exchange()
+                .subscribe(item -> log.info("item {}", item));
+        Thread.sleep(2000);
     }
 
     @Test
