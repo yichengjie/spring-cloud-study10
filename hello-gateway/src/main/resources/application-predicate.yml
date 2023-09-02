@@ -17,6 +17,11 @@ spring:
           predicates:
             - Path=/add_request_parameter_route
           filters:
+            - name: Custom
+              args:
+                message: My Custom Message
+                preLogger: true
+                postLogger: true
             - AddRequestParameter=red, blue
             - AddResponseHeader=X-Response-Red, Blue
             - StripPrefix=1

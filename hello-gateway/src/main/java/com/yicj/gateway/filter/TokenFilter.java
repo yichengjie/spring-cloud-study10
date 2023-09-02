@@ -2,6 +2,7 @@ package com.yicj.gateway.filter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.yicj.gateway.utils.CommonUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -31,9 +32,8 @@ public class TokenFilter implements GlobalFilter, Ordered {
         HttpHeaders headers = request.getHeaders();
         String authorization = headers.getFirst("Authorization");
         if (StringUtils.isNotBlank(authorization)){
-            return chain.filter(exchange) ;
+            return chain.filter(exchange).contextWrite(context -> context.put("trace_id", CommonUtil.uuid())) ;
         }
-
         // 设置response请求头编码
         response.getHeaders().add("Content-Type", "application/json;charset=UTF-8");
         //如果没有传递token直接给出错误提示信息

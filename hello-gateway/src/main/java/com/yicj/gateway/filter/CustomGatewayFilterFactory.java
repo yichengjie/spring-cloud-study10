@@ -33,37 +33,22 @@ public class CustomGatewayFilterFactory extends AbstractGatewayFilterFactory<Cus
     @Override
     public GatewayFilter apply(Config config) {
         return (exchange, chain) -> {
-
-            ServerHttpRequest request = exchange.getRequest();
-            Flux<DataBuffer> body = request.getBody();
-//            body.subscribe(buffer -> {
-//                byte [] bytes = new byte[buffer.readableByteCount()] ;
-//                buffer.read(bytes) ;
-//                DataBufferUtils.release(buffer) ;
-//                String bodyString = new String(bytes);
-//                log.info("Body String : {}", bodyString);
-//            }) ;
-
-//            AtomicReference<String> bodyRef = new AtomicReference<>();
-//            body.subscribe(buffer -> {
-//                CharBuffer charBuffer = StandardCharsets.UTF_8.decode(buffer.asByteBuffer());
-//                DataBufferUtils.release(buffer);
-//                bodyRef.set(charBuffer.toString());
-//            });
-//            //获取request body
-//            String bodyStr = bodyRef.get();
-//            log.info(bodyStr);
-
-            if (config.isPreLogger()) {
-                log.info("CustomGatewayFilterFactory pre message is {}", config.getMessage());
-            }
-            return chain.filter(exchange).then(Mono.fromRunnable(() -> {
-                if (config.isPostLogger()) {
-                    log.info("CustomGatewayFilterFactory post message is {}", config.getMessage());
+            return Mono.deferContextual(contextView -> {
+                String traceId = (String)contextView.get("trace_id");
+                log.info("CustomGatewayFilterFactory : {}", traceId);
+                ServerHttpRequest request = exchange.getRequest();
+                if (config.isPreLogger()) {
+                    log.info("CustomGatewayFilterFactory pre message is {}", config.getMessage());
                 }
-            }));
+                return chain.filter(exchange).then(Mono.fromRunnable(() -> {
+                    if (config.isPostLogger()) {
+                        log.info("CustomGatewayFilterFactory post message is {}", config.getMessage());
+                    }
+                }));
+            }) ;
         };
     }
+
 
     @Data
     @AllArgsConstructor
