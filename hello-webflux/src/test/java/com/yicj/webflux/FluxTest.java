@@ -5,7 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Scheduler;
 import reactor.core.scheduler.Schedulers;
+
+import java.lang.reflect.Array;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,6 +16,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.function.BiConsumer;
 
 /**
  * @author yicj
@@ -130,7 +134,7 @@ public class FluxTest {
             .map(PersonEntity::getId)
             .flatMap(id -> findPersonById(id, true))
             // 上一步出错之后执行的逻辑，后续元素将不再继续
-            .onErrorResume(throwable -> Mono.just(new PersonEntity()))
+            //.onErrorResume(throwable -> Mono.just(new PersonEntity()))
             //.switchIfEmpty(Mono.just(new PersonEntity()))
             .subscribe(
                 item -> log.info("value : {}", item),
@@ -138,6 +142,34 @@ public class FluxTest {
             ) ;
     }
 
+
+
+    @Test
+    public void handle(){
+        List<String> list = Arrays.asList("1", "2", "3");
+        Flux<String> flux = Flux.fromIterable(list);
+        flux.handle((item, sink) -> {
+            List<String> tmpList = new ArrayList<>(){{
+                add("1") ;
+                add("3") ;
+            }} ;
+            if (tmpList.contains(item)){
+                sink.next(Integer.parseInt(item));
+            }
+        })
+        .subscribe(value -> log.info("value : {}", value)) ;
+    }
+
+    @Test
+    public void thread() throws InterruptedException {
+        final Mono<String> mono = Mono.just("hello ");
+        Thread thread = new Thread(() -> {
+            mono.map(item -> "thread " + item)
+                    .subscribe(item -> log.info("value: {}", item));
+        });
+        thread.start();
+        thread.join();
+    }
 
     @Test
     public void onError(){
@@ -155,6 +187,39 @@ public class FluxTest {
                 error -> log.error("处理出错: ", error)
             ) ;
         sleep(2000);
+    }
+
+    @Test
+    public void publishOn() throws InterruptedException {
+        Scheduler s = Schedulers.newParallel("parallel-scheduler", 4);
+        final Flux<String> flux = Flux
+                .range(1, 2)
+                .map(i -> {
+                    log.info("map item : {}", i);
+                    return 10 + i ;
+                })
+                .publishOn(s)
+                .map(i -> "value " + i);
+        Thread thread = new Thread(() -> flux.subscribe(value -> log.info("value : {}",value)));
+        thread.start();
+        thread.join();
+    }
+
+
+    @Test
+    public void subscribeOn() throws InterruptedException {
+        Scheduler s = Schedulers.newParallel("parallel-scheduler", 4);
+        final Flux<String> flux = Flux
+                .range(1, 2)
+                .map(i -> {
+                    log.info("map item : {}", i);
+                    return 10 + i ;
+                })
+                .subscribeOn(s)
+                .map(i -> "value " + i);
+        Thread thread = new Thread(() -> flux.subscribe(item -> log.info("item value : {}",item)));
+        thread.start();
+        thread.join();
     }
 
 
@@ -175,6 +240,36 @@ public class FluxTest {
 
 
     @Test
+    public void onErrorReturn(){
+        PersonEntity errorReturnPerson = new PersonEntity() ;
+        errorReturnPerson.setId("99");
+        errorReturnPerson.setUsername("error return person");
+        errorReturnPerson.setAddress("xxx");
+        Flux.range(1,10)
+            .map(String::valueOf)
+            .flatMap(item -> this.findPersonById(item, true))
+            .onErrorReturn(errorReturnPerson)
+            .subscribe(item -> log.info("item :{}", item)) ;
+    }
+
+    @Test
+    public void onErrorResume3(){
+        PersonEntity errorReturnPerson = new PersonEntity() ;
+        errorReturnPerson.setId("88");
+        errorReturnPerson.setUsername("error resume person");
+        errorReturnPerson.setAddress("yyy");
+        Flux.range(1,10)
+                .map(String::valueOf)
+                .flatMap(item -> this.findPersonById(item, true))
+                .onErrorResume(error -> {
+                    log.error("error msg : ", error);
+                    return Mono.just(errorReturnPerson) ;
+                })
+                .subscribe(item -> log.info("item :{}", item)) ;
+    }
+
+
+    @Test
     public void create(){
         Flux<PersonEntity> flux = this.listAllPerson(1,false);
         flux.subscribe(item -> log.info("item -> {}",item)) ;
@@ -183,7 +278,7 @@ public class FluxTest {
     @Test
     public void fromIterable(){
         List<String> list = Arrays.asList("1", "2", "3", null);
-        list.stream().forEach(item -> log.info("value : {}", item));
+        list.forEach(item -> log.info("value : {}", item));
         // stream中null能正常输出，但是flux null会报错
         //
         Flux.fromIterable(list)
