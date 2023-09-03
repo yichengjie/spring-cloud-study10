@@ -44,7 +44,7 @@ public class AuthWebClient implements InitializingBean {
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(form)
                 .retrieve()
-                .bodyToMono(new ParameterizedTypeReference<RestResponse<TokenVO>>(){}) ;
+                .bodyToMono(new ParameterizedTypeReference<RestResponse<TokenVO>>(){});
     }
 
 
