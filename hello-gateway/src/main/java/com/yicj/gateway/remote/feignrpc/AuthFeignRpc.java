@@ -1,7 +1,9 @@
 package com.yicj.gateway.remote.feignrpc;
 
+import com.yicj.common.exception.AppException;
 import com.yicj.common.model.form.LoginForm;
 import com.yicj.common.model.form.RegisterForm;
+import com.yicj.common.model.vo.RestResponse;
 import com.yicj.common.model.vo.TokenVO;
 import com.yicj.common.model.vo.UserVO;
 import com.yicj.gateway.remote.feign.AuthFeignClient;
@@ -26,22 +28,35 @@ public class AuthFeignRpc {
 
 
     public Mono<TokenVO> login(LoginForm form){
-        CompletableFuture<TokenVO> future = CompletableFuture.supplyAsync(
+        CompletableFuture<RestResponse<TokenVO>> future = CompletableFuture.supplyAsync(
                 () -> authFeignClient.login(form), threadPoolTaskExecutor);
-        return Mono.fromFuture(future) ;
+        return this.extractCompletableFuture(future) ;
+    }
+
+    private <T> Mono<T> extractCompletableFuture(CompletableFuture<RestResponse<T>> future){
+        return Mono.create(sink -> {
+            future.whenComplete((response, error) -> {
+                if (RestResponse.isDefaultSuccess(response.getCode())){
+                    sink.success(response.getData());
+                }else {
+                    String message = response.getMessage();
+                    sink.error(new AppException(response.getCode(), message));
+                }
+            }) ;
+        }) ;
     }
 
 
     public Mono<TokenVO> register(RegisterForm form){
-        CompletableFuture<TokenVO> future = CompletableFuture.supplyAsync(
+        CompletableFuture<RestResponse<TokenVO>> future = CompletableFuture.supplyAsync(
                 () -> authFeignClient.register(form), threadPoolTaskExecutor);
-        return Mono.fromFuture(future) ;
+        return this.extractCompletableFuture(future) ;
     }
 
     public Mono<UserVO> findByToken(String token){
-        CompletableFuture<UserVO> future = CompletableFuture.supplyAsync(
+        CompletableFuture<RestResponse<UserVO>> future = CompletableFuture.supplyAsync(
                 () -> authFeignClient.findByToken(token), threadPoolTaskExecutor);
-        return Mono.fromFuture(future) ;
+        return this.extractCompletableFuture(future) ;
     }
 
 }

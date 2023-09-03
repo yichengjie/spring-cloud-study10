@@ -2,7 +2,10 @@ package com.yicj.gateway.remote.feign;
 
 import com.yicj.common.model.form.LoginForm;
 import com.yicj.common.model.form.RegisterForm;
+import com.yicj.common.model.vo.RestResponse;
 import com.yicj.common.model.vo.TokenVO;
+import com.yicj.common.model.vo.UserVO;
+import com.yicj.common.utils.CommonUtil;
 import com.yicj.gateway.BaseJunit;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -23,7 +26,7 @@ public class AuthFeignClientTest extends BaseJunit {
         LoginForm form = new LoginForm() ;
         form.setUsername("hello");
         form.setPassword("123");
-        TokenVO token = feignClient.login(form);
+        RestResponse<TokenVO> token = feignClient.login(form);
         log.info("token : {}", token);
     }
 
@@ -33,8 +36,14 @@ public class AuthFeignClientTest extends BaseJunit {
         form.setUsername("hello");
         form.setPassword("123");
         form.setAddress("BJS");
-        TokenVO token = feignClient.register(form);
+        RestResponse<TokenVO> token = feignClient.register(form);
         log.info("token : {}", token);
     }
 
+    @Test
+    public void findByToken(){
+        String token = CommonUtil.uuid();
+        RestResponse<UserVO> vo = feignClient.findByToken(token);
+        log.info("user vo : {}", vo);
+    }
 }

@@ -2,6 +2,7 @@ package com.yicj.user.controller;
 
 import com.yicj.common.model.form.LoginForm;
 import com.yicj.common.model.form.RegisterForm;
+import com.yicj.common.model.vo.RestResponse;
 import com.yicj.common.model.vo.TokenVO;
 import com.yicj.common.model.vo.UserVO;
 import com.yicj.common.utils.CommonUtil;
@@ -24,29 +25,32 @@ public class AuthController {
     private UserService userService ;
 
     @PostMapping("/login")
-    public Mono<TokenVO> login(@RequestBody LoginForm form){
+    public Mono<RestResponse<TokenVO>> login(@RequestBody LoginForm form){
         log.info("[Controller] user login , username: {}, password: {}", form.getUsername(), form.getPassword());
         String username = form.getUsername();
         String password = form.getPassword();
         CommonUtil.sleepQuiet(1000);
-        return userService.login(username, password);
+        return userService.login(username, password)
+            .map(RestResponse::success);
     }
 
     @PostMapping("/register")
-    public Mono<TokenVO> register(@RequestBody RegisterForm form){
+    public Mono<RestResponse<TokenVO>> register(@RequestBody RegisterForm form){
         log.info("[Controller] user register , username: {}, password: {}", form.getUsername(), form.getPassword());
         String username = form.getUsername();
         String password = form.getPassword();
         String address = form.getAddress();
         CommonUtil.sleepQuiet(1000);
-        return userService.register(username, password, address) ;
+        return userService.register(username, password, address)
+            .map(RestResponse::success);
     }
 
     @GetMapping("/findByToken")
-    public Mono<UserVO> findByToken(@RequestHeader("token") String token){
+    public Mono<RestResponse<UserVO>> findByToken(@RequestHeader("token") String token){
         log.info("[Controller] findByToken , token {}", token);
         CommonUtil.sleepQuiet(1000);
-        return userService.findByToken(token) ;
+        return userService.findByToken(token)
+            .map(RestResponse::success);
     }
 
 }

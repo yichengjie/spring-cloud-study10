@@ -3,6 +3,7 @@ package com.yicj.gateway.remote.feign;
 import com.yicj.common.constants.CommonConstants;
 import com.yicj.common.model.form.LoginForm;
 import com.yicj.common.model.form.RegisterForm;
+import com.yicj.common.model.vo.RestResponse;
 import com.yicj.common.model.vo.TokenVO;
 import com.yicj.common.model.vo.UserVO;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -19,12 +20,12 @@ import org.springframework.web.bind.annotation.RequestHeader;
 public interface AuthFeignClient {
 
     @PostMapping(CommonConstants.AUTH_LOGIN_PATH)
-    TokenVO login(@RequestBody LoginForm form) ;
+    RestResponse<TokenVO> login(@RequestBody LoginForm form) ;
 
     @PostMapping(CommonConstants.AUTH_REGISTER_PATH)
-    TokenVO register(@RequestBody RegisterForm form) ;
+    RestResponse<TokenVO> register(@RequestBody RegisterForm form) ;
 
     @GetMapping(CommonConstants.AUTH_FIND_BY_TOKEN_PATH)
-    UserVO findByToken(@RequestHeader("token") String token) ;
+    RestResponse<UserVO> findByToken(@RequestHeader("token") String token) ;
 
 }

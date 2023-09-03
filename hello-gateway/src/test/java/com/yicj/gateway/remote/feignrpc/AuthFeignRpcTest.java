@@ -2,6 +2,8 @@ package com.yicj.gateway.remote.feignrpc;
 
 import com.yicj.common.model.form.LoginForm;
 import com.yicj.common.model.form.RegisterForm;
+import com.yicj.common.model.vo.TokenVO;
+import com.yicj.common.model.vo.UserVO;
 import com.yicj.common.utils.CommonUtil;
 import com.yicj.gateway.BaseJunit;
 import lombok.extern.slf4j.Slf4j;
@@ -22,8 +24,9 @@ public class AuthFeignRpcTest extends BaseJunit {
         LoginForm form = new LoginForm() ;
         form.setUsername("hello");
         form.setPassword("123");
-        feignRpc.login(form)
-            .subscribe(value -> log.info("value : {}",value));
+        TokenVO vo = feignRpc.login(form)
+                .block();
+        log.info("user vo : {}", vo);
     }
 
     @Test
@@ -32,14 +35,16 @@ public class AuthFeignRpcTest extends BaseJunit {
         form.setUsername("hello");
         form.setPassword("123");
         form.setAddress("BJS");
-        feignRpc.register(form)
-            .subscribe(value -> log.info("value : {}",value));
+        TokenVO vo = feignRpc.register(form)
+                .block();
+        log.info("user vo : {}", vo);
     }
 
     @Test
     public void findByToken(){
         String token = CommonUtil.uuid() ;
-        feignRpc.findByToken(token)
-            .subscribe(value -> log.info("value : {}",value));
+        UserVO vo = feignRpc.findByToken(token)
+                .block();
+        log.info("user vo : {}", vo);
     }
 }

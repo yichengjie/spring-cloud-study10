@@ -13,6 +13,9 @@ public class TokenVO implements Serializable {
 
     private String token ;
 
+    public TokenVO(){
+
+    }
     public TokenVO(String token){
         this.token = token ;
     }

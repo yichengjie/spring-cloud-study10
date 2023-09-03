@@ -30,4 +30,8 @@ public class RestResponse<T> {
         response.setData(data);
         return response ;
     }
+
+    public static boolean isDefaultSuccess(String code){
+       return SUCCESS_CODE.equals(code) ;
+    }
 }
