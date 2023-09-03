@@ -9,9 +9,9 @@ public interface CommonConstants {
     String GATEWAY_LOGIN_PATH = "/auth/login" ;
     String GATEWAY_REGISTER_PATH = "/auth/register" ;
 
-    String AUTH_REGISTER_PATH = "/user-service/auth/login" ;
+    String AUTH_LOGIN_PATH = "/user-service/auth/login" ;
 
-    String AUTH_LOGIN_PATH = "/user-service/auth/register" ;
+    String AUTH_REGISTER_PATH = "/user-service/auth/register" ;
 
     String AUTH_SERVICE_NAME = "hello-user-service" ;
 
