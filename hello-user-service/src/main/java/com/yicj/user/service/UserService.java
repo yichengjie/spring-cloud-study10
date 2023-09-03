@@ -1,5 +1,6 @@
 package com.yicj.user.service;
 
+import com.yicj.common.model.vo.TokenVO;
 import com.yicj.common.model.vo.UserVO;
 import reactor.core.publisher.Mono;
 
@@ -15,7 +16,7 @@ public interface UserService {
      * @param password 密码
      * @return token
      */
-    Mono<String> login(String username, String password) ;
+    Mono<TokenVO> login(String username, String password) ;
 
     /**
      * 注册
@@ -23,7 +24,7 @@ public interface UserService {
      * @param password 密码
      * @return token
      */
-    Mono<String> register(String username, String password, String address) ;
+    Mono<TokenVO> register(String username, String password, String address) ;
 
 
     Mono<UserVO> findByToken(String token) ;

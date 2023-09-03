@@ -1,5 +1,7 @@
 package com.yicj.gateway.utils;
 
+import reactor.core.publisher.Mono;
+
 import java.util.UUID;
 
 /**
@@ -11,4 +13,5 @@ public class CommonUtil {
     public static String uuid() {
         return UUID.randomUUID().toString().replaceAll("-", "") ;
     }
+
 }

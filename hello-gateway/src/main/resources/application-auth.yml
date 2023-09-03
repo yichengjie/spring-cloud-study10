@@ -1,0 +1,17 @@
+# 将这段配置放入nacos配置文件gateway-app.yaml中，可以实现动态路由效果
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: user_login
+          uri: http://localhsot:8080
+          predicates:
+            - Path=/auth/login
+          filters:
+            - name: Custom
+              args:
+                message: My Custom Message
+                preLogger: true
+                postLogger: true
+            - AddRequestParameter=red, blue
+            - AddResponseHeader=X-Response-Red, Blue

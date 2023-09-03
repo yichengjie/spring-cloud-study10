@@ -1,5 +1,6 @@
 package com.yicj.user.service;
 
+import com.yicj.common.model.vo.TokenVO;
 import com.yicj.user.UserServiceApplication;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -57,10 +58,10 @@ public class UserServiceTest {
         String password = "123" ;
         String address = "BJS" ;
         // 注册用户
-        String token = userService.register(username, password, address).block();
+        TokenVO token = userService.register(username, password, address).block();
         log.info("login user toke : {}", token);
         // 根据token获取用户信息
-        userService.findByToken(token)
+        userService.findByToken(token.getToken())
                 .subscribe(value -> log.info("user info : {}", value));
 
     }

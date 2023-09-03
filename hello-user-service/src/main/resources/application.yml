@@ -4,7 +4,7 @@ server:
     context-path: /user-service
 spring:
   application:
-    name: hello-user-server
+    name: hello-user-service
   cloud:
     nacos:
       discovery:

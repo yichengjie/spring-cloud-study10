@@ -2,6 +2,7 @@ package com.yicj.gateway.filter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.yicj.common.constants.CommonConstants;
 import com.yicj.gateway.utils.CommonUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class TokenFilter implements GlobalFilter, Ordered {
         ServerHttpRequest request = exchange.getRequest();
         ServerHttpResponse response = exchange.getResponse();
         HttpHeaders headers = request.getHeaders();
-        String authorization = headers.getFirst("Authorization");
+        String authorization = headers.getFirst(CommonConstants.HEADER_TOKEN_NAME);
         if (StringUtils.isNotBlank(authorization)){
             return chain.filter(exchange).contextWrite(context -> context.put("trace_id", CommonUtil.uuid())) ;
         }
@@ -49,7 +50,6 @@ public class TokenFilter implements GlobalFilter, Ordered {
             }catch (JsonProcessingException e){
                 monoSink.error(e);
             }
-            // response.setComplete() ;
         })) ;
     }
 

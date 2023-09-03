@@ -1,6 +1,7 @@
 package com.yicj.user.service.impl;
 
 import com.yicj.common.exception.AppException;
+import com.yicj.common.model.vo.TokenVO;
 import com.yicj.common.model.vo.UserVO;
 import com.yicj.common.utils.CommonUtil;
 import com.yicj.user.model.entity.UserEntity;
@@ -42,7 +43,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public Mono<String> login(String username, String password) {
+    public Mono<TokenVO> login(String username, String password) {
         return Flux.fromIterable(USER_LIST)
             .filter(item -> equalsUserFunc(username, password).apply(item))
             .next()
@@ -71,12 +72,12 @@ public class UserServiceImpl implements UserService {
                 vo.setAddress(item.getAddress());
                 LOGIN_USER_MAP.put(token, vo);
                 //
-                return token;
+                return new TokenVO(token);
             });
     }
 
     @Override
-    public Mono<String> register(String username, String password, String address) {
+    public Mono<TokenVO> register(String username, String password, String address) {
         return this.checkUseNameDuplicate(username)
             .then(Mono.defer(() -> {
                 log.info("[Service] 用户信息保存入库...");
@@ -101,7 +102,7 @@ public class UserServiceImpl implements UserService {
                 LOGIN_USER_MAP.put(token, vo) ;
                 LOGIN_USERID_MAP.put(userId, token) ;
                 return Mono.zip(Mono.just(token), Mono.just(vo)) ;
-            }).map(Tuple2::getT1) ;
+            }).map(tuple -> new TokenVO(tuple.getT1())) ;
     }
 
     @Override

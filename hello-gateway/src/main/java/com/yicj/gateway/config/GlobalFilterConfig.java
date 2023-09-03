@@ -9,7 +9,7 @@ import reactor.core.publisher.Mono;
 
 import java.security.Principal;
 
-@Configuration
+//@Configuration
 public class GlobalFilterConfig {
 
     @Bean
