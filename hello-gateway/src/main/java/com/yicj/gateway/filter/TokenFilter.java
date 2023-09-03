@@ -3,10 +3,9 @@ package com.yicj.gateway.filter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yicj.common.constants.CommonConstants;
+import com.yicj.common.utils.CommonUtil;
 import com.yicj.gateway.constants.FilterOrderConstant;
-import com.yicj.gateway.utils.CommonUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -17,8 +16,6 @@ import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
-
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 

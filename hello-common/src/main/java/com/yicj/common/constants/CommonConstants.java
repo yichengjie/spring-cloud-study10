@@ -13,6 +13,8 @@ public interface CommonConstants {
 
     String AUTH_REGISTER_PATH = "/user-service/auth/register" ;
 
+    String AUTH_FIND_BY_TOKEN_PATH = "/user-service/auth/findByToken" ;
+
     String AUTH_SERVICE_NAME = "hello-user-service" ;
 
     String CACHE_BODY_ATTRIBUTE = "cache_body_attribute" ;

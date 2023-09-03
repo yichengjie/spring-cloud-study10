@@ -4,9 +4,12 @@ import com.yicj.common.constants.CommonConstants;
 import com.yicj.common.model.form.LoginForm;
 import com.yicj.common.model.form.RegisterForm;
 import com.yicj.common.model.vo.TokenVO;
+import com.yicj.common.model.vo.UserVO;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 /**
  * @author yicj
@@ -20,5 +23,8 @@ public interface AuthFeignClient {
 
     @PostMapping(CommonConstants.AUTH_REGISTER_PATH)
     TokenVO register(@RequestBody RegisterForm form) ;
+
+    @GetMapping(CommonConstants.AUTH_FIND_BY_TOKEN_PATH)
+    UserVO findByToken(@RequestHeader("token") String token) ;
 
 }

@@ -7,8 +7,10 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.stream.Collectors;
 
 /**
@@ -35,6 +37,18 @@ public class AppConfig {
     @ConditionalOnMissingBean
     public HttpMessageConverters messageConverters(ObjectProvider<HttpMessageConverter<?>> converters) {
         return new HttpMessageConverters(converters.orderedStream().collect(Collectors.toList()));
+    }
+
+    @Bean(name = "threadPoolTaskExecutor")
+    public ThreadPoolTaskExecutor threadPoolTaskExecutor(){
+        ThreadPoolTaskExecutor pool = new ThreadPoolTaskExecutor() ;
+        pool.setThreadNamePrefix("custom-thread-pool-") ;
+        pool.setCorePoolSize(11);
+        pool.setMaxPoolSize(100);
+        pool.setKeepAliveSeconds(60);
+        pool.setQueueCapacity(1000);
+        pool.setAllowCoreThreadTimeOut(true);
+        return pool ;
     }
 
 }
