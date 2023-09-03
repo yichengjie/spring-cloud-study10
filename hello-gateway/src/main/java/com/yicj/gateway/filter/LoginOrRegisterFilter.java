@@ -46,12 +46,14 @@ public class LoginOrRegisterFilter implements GlobalFilter, Ordered {
             // 登录操作
             String bodyContent = exchange.getAttribute(CommonConstants.CACHE_BODY_ATTRIBUTE);
             LoginForm form = JSON.parseObject(bodyContent, LoginForm.class);
+            log.info("登录用户名：{}, 密码：{}", form.getUsername(), form.getPassword());
             TokenVO token = authFeignClient.login(form);
             // 输出返回给前端
             return this.printToken(exchange, token) ;
         }else if (path.equals(CommonConstants.GATEWAY_REGISTER_PATH)){
             String bodyContent = exchange.getAttribute(CommonConstants.CACHE_BODY_ATTRIBUTE);
             RegisterForm form = JSON.parseObject(bodyContent, RegisterForm.class);
+            log.info("注册用户名：{}, 密码：{}", form.getUsername(), form.getPassword());
             // 注册操作
             TokenVO token = authFeignClient.register(form);
             // 输出返回给前端

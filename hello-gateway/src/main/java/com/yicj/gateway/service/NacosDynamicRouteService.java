@@ -6,15 +6,15 @@ import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.config.ConfigService;
 import com.alibaba.nacos.api.config.listener.AbstractListener;
 import com.alibaba.nacos.api.exception.NacosException;
-import com.alibaba.nacos.shaded.com.google.gson.JsonArray;
 import com.yicj.gateway.config.GatewayConfig;
-import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Properties;
 

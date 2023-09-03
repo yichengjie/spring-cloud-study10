@@ -33,9 +33,9 @@ public class CustomGatewayFilterFactory extends AbstractGatewayFilterFactory<Cus
     @Override
     public GatewayFilter apply(Config config) {
         return (exchange, chain) -> {
-            return Mono.deferContextual(contextView -> {
-                String traceId = (String)contextView.get("trace_id");
-                log.info("CustomGatewayFilterFactory : {}", traceId);
+            //return Mono.deferContextual(contextView -> {
+                //String traceId = (String)contextView.get("trace_id");
+                //log.info("CustomGatewayFilterFactory : {}", traceId);
                 ServerHttpRequest request = exchange.getRequest();
                 if (config.isPreLogger()) {
                     log.info("CustomGatewayFilterFactory pre message is {}", config.getMessage());
@@ -45,7 +45,7 @@ public class CustomGatewayFilterFactory extends AbstractGatewayFilterFactory<Cus
                         log.info("CustomGatewayFilterFactory post message is {}", config.getMessage());
                     }
                 }));
-            }) ;
+            //}) ;
         };
     }
 

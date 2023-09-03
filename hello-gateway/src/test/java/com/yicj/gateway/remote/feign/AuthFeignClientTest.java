@@ -5,7 +5,8 @@ import com.yicj.common.model.form.RegisterForm;
 import com.yicj.common.model.vo.TokenVO;
 import com.yicj.gateway.BaseJunit;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Test;
+//import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

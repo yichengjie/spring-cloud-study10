@@ -26,13 +26,13 @@ public class MonoTest {
         mono.subscribe(value -> log.info(" -> {}", value)) ;
     }
 
-    @Test
-    public void deferContextual() {
-        Mono.just("Hello")
-            .flatMap(value -> Mono.deferContextual(ctx -> Mono.just(value + ", "+ ctx.get("name"))))
-            .contextWrite(ctx -> ctx.put("name", "World"))
-            .subscribe(value -> log.info("value : {}", value)) ;
-    }
+//    @Test
+//    public void deferContextual() {
+//        Mono.just("Hello")
+//            .flatMap(value -> Mono.deferContextual(ctx -> Mono.just(value + ", "+ ctx.get("name"))))
+//            .contextWrite(ctx -> ctx.put("name", "World"))
+//            .subscribe(value -> log.info("value : {}", value)) ;
+//    }
 
     @Test
     public void zip(){

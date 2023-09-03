@@ -9,32 +9,37 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>eureka-server</module>
+       <!-- <module>eureka-server</module>
         <module>eureka-client</module>
         <module>hello-springdoc</module>
         <module>hello-database</module>
-        <module>hello-minio</module>
+        <module>hello-minio</module>-->
         <module>hello-gateway</module>
-        <module>hello-nacos-client</module>
-        <module>hello-sentinel-client</module>
-        <module>hello-resilience4j</module>
-        <module>hello-webmvc</module>
-        <module>hello-webflux</module>
+<!--        <module>hello-nacos-client</module>-->
+<!--        <module>hello-sentinel-client</module>-->
+       <!-- <module>hello-resilience4j</module>-->
+<!--        <module>hello-webmvc</module>-->
+<!--        <module>hello-webflux</module>-->
         <module>hello-user-service</module>
-        <module>hello-open-feign</module>
-        <module>hello-websecurity</module>
+<!--        <module>hello-open-feign</module>-->
+<!--        <module>hello-websecurity</module>-->
         <module>hello-common</module>
     </modules>
 
     <properties>
-        <java.version>17</java.version>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <java.version>8</java.version>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!--
         <spring-boot.version>3.0.9</spring-boot.version>
         <spring-cloud.version>2022.0.4</spring-cloud.version>
         <spring-alibaba.version>2022.0.0.0</spring-alibaba.version>
+        -->
+        <spring-boot.version>2.1.18.RELEASE</spring-boot.version>
+        <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
+        <spring-alibaba.version>2.1.4.RELEASE</spring-alibaba.version>
 <!--        <spring-boot.version>2.6.15</spring-boot.version>
         <spring-cloud.version>2021.0.8</spring-cloud.version>-->
     </properties>
@@ -55,10 +60,17 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <dependency>
+          <!--  <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
                 <version>${spring-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>-->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>2.1.0.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -95,11 +107,11 @@
                 <version>3.5.3.2</version>
             </dependency>
 
-            <dependency>
+   <!--         <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
                 <version>4.1.3</version>
-            </dependency>
+            </dependency>-->
 
             <dependency>
                 <groupId>com.baomidou</groupId>
@@ -113,17 +125,17 @@
                 <version>3.9.1</version>
             </dependency>
 
-            <dependency>
+    <!--        <dependency>
                 <groupId>org.jasypt</groupId>
                 <artifactId>jasypt</artifactId>
                 <version>1.9.3</version>
-            </dependency>
+            </dependency>-->
 
-            <dependency>
+      <!--      <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-mate-starter</artifactId>
                 <version>1.3.1</version>
-            </dependency>
+            </dependency>-->
 
             <dependency>
                 <groupId>com.github.jsqlparser</groupId>

@@ -34,7 +34,7 @@ public class TokenFilter implements GlobalFilter, Ordered {
         HttpHeaders headers = request.getHeaders();
         String authorization = headers.getFirst(CommonConstants.HEADER_TOKEN_NAME);
         if (StringUtils.isNotBlank(authorization)){
-            return chain.filter(exchange).contextWrite(context -> context.put("trace_id", CommonUtil.uuid())) ;
+            return chain.filter(exchange)/*.contextWrite(context -> context.put("trace_id", CommonUtil.uuid()))*/ ;
         }
         // 设置response请求头编码
         response.getHeaders().add("Content-Type", "application/json;charset=UTF-8");

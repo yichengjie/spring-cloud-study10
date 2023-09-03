@@ -31,3 +31,11 @@ spring:
       discovery:
         locator:
           enabled: false # 这里设置为ture后服务无法访问
+feign:
+  httpclient:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 30000
+        readTimeout: 30000
