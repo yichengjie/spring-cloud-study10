@@ -17,6 +17,7 @@ import org.springframework.core.Ordered;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -38,19 +39,17 @@ public class LoginOrRegisterFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        Route route = exchange.getAttribute(ServerWebExchangeUtils.GATEWAY_ROUTE_ATTR);
-        if (route == null){
-            return chain.filter(exchange) ;
-        }
-        String path = route.getUri().getPath();
-        if (path.equals(CommonConstants.AUTH_LOGIN_PATH)){
+        //Route route = exchange.getAttribute(ServerWebExchangeUtils.GATEWAY_ROUTE_ATTR);
+        ServerHttpRequest request = exchange.getRequest();
+        String path = request.getURI().getPath();
+        if (path.equals(CommonConstants.GATEWAY_LOGIN_PATH)){
             // 登录操作
             String bodyContent = exchange.getAttribute(CommonConstants.CACHE_BODY_ATTRIBUTE);
             LoginForm form = JSON.parseObject(bodyContent, LoginForm.class);
             TokenVO token = authFeignClient.login(form);
             // 输出返回给前端
             return this.printToken(exchange, token) ;
-        }else if (path.endsWith(CommonConstants.AUTH_REGISTER_PATH)){
+        }else if (path.equals(CommonConstants.GATEWAY_REGISTER_PATH)){
             String bodyContent = exchange.getAttribute(CommonConstants.CACHE_BODY_ATTRIBUTE);
             RegisterForm form = JSON.parseObject(bodyContent, RegisterForm.class);
             // 注册操作

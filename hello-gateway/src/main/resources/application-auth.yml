@@ -28,3 +28,6 @@ spring:
             - Path=/auth/register
           filters:
             - AddRequestParameter=red, blue
+      discovery:
+        locator:
+          enabled: false # 这里设置为ture后服务无法访问
