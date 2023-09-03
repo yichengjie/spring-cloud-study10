@@ -1,6 +1,8 @@
 spring:
   application:
     name: gateway-app
+  main:
+    allow-circular-references: true
 server:
   port: 8080
   # 注意在gateway中配置context-path不生效

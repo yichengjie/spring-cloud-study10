@@ -3,6 +3,7 @@ package com.yicj.gateway.filter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yicj.common.constants.CommonConstants;
+import com.yicj.gateway.constants.FilterOrderConstant;
 import com.yicj.gateway.utils.CommonUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,6 @@ public class TokenFilter implements GlobalFilter, Ordered {
 
     @Override
     public int getOrder() {
-        return 0;
+        return FilterOrderConstant.TOKEN_CHECK;
     }
 }

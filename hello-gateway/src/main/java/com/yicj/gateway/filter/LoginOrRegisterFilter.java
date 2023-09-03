@@ -5,6 +5,7 @@ import com.yicj.common.constants.CommonConstants;
 import com.yicj.common.model.form.LoginForm;
 import com.yicj.common.model.form.RegisterForm;
 import com.yicj.common.model.vo.TokenVO;
+import com.yicj.gateway.constants.FilterOrderConstant;
 import com.yicj.gateway.remote.feign.AuthFeignClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +32,6 @@ import reactor.core.publisher.Mono;
 @Slf4j
 @Component
 public class LoginOrRegisterFilter implements GlobalFilter, Ordered {
-
-    @Autowired
-    private WebClient webClient  ;
 
     @Autowired
     private AuthFeignClient authFeignClient ;
@@ -75,6 +73,6 @@ public class LoginOrRegisterFilter implements GlobalFilter, Ordered {
 
     @Override
     public int getOrder() {
-        return Ordered.HIGHEST_PRECEDENCE;
+        return FilterOrderConstant.LOGIN_OR_REGISTER;
     }
 }

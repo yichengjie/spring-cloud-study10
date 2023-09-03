@@ -1,6 +1,7 @@
 package com.yicj.gateway.filter;
 
 import com.yicj.common.constants.CommonConstants;
+import com.yicj.gateway.constants.FilterOrderConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -59,6 +60,6 @@ public class CacheBodyGlobalFilter implements GlobalFilter, Ordered {
 
     @Override
     public int getOrder() {
-        return 0;
+        return FilterOrderConstant.CACHE_REQUEST_BODY;
     }
 }

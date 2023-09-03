@@ -3,10 +3,10 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: user_login
-          uri: http://localhsot:8080
+        - id: add_request_parameter_route
+          uri: https://example.org
           predicates:
-            - Path=/auth/login
+            - Path=/add_request_parameter_route
           filters:
             - name: Custom
               args:
@@ -15,3 +15,16 @@ spring:
                 postLogger: true
             - AddRequestParameter=red, blue
             - AddResponseHeader=X-Response-Red, Blue
+            - StripPrefix=1
+        - id: user_login
+          uri: http://localhsot:8080
+          predicates:
+            - Path=/auth/login
+          filters:
+            - AddRequestParameter=red, blue
+        - id: user_register
+          uri: http://localhsot:8080
+          predicates:
+            - Path=/auth/register
+          filters:
+            - AddRequestParameter=red, blue
