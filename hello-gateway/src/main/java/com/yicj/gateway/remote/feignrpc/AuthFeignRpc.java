@@ -7,6 +7,7 @@ import com.yicj.common.model.vo.RestResponse;
 import com.yicj.common.model.vo.TokenVO;
 import com.yicj.common.model.vo.UserVO;
 import com.yicj.gateway.remote.feign.AuthFeignClient;
+import com.yicj.gateway.utils.GatewayUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;

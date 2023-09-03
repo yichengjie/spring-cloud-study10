@@ -26,6 +26,24 @@ public class MonoTest {
             .subscribe(value -> log.info("value : {}",value)) ;
     }
 
+    @Test
+    public void doOnError(){
+        Mono.error(new RuntimeException("test error !!!"))
+                .map(value -> 1)
+                .doOnError(error -> {
+                    log.error("错误异常处理 ", error);
+                }).subscribe() ;
+    }
+
+    @Test
+    public void onErrorResume(){
+        Mono.error(new RuntimeException("test error !!!"))
+                .map(value -> 1)
+                .onErrorResume(error -> {
+                    log.error("错误异常处理 ", error);
+                    return Mono.empty() ;
+                }).subscribe() ;
+    }
 
     /**
      * 当数据不存在时候报错提示
