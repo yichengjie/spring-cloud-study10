@@ -20,6 +20,27 @@ import java.util.stream.Stream;
 public class MonoTest {
 
     @Test
+    public void switchIfEmpty(){
+        Mono.just(1)
+            .switchIfEmpty(Mono.error(new RuntimeException("数据不存在!")))
+            .subscribe(value -> log.info("value : {}",value)) ;
+    }
+
+
+    /**
+     * 当数据不存在时候报错提示
+     */
+    @Test
+    @SuppressWarnings("all")
+    public void switchIfEmptyError(){
+        Mono.just(1)
+                .then()
+                .switchIfEmpty(Mono.error(new RuntimeException("数据不存在!")))
+                .subscribe(value -> log.info("value : {}",value)) ;
+    }
+
+
+    @Test
     public void fromSupplier(){
         Mono.fromSupplier(() -> "hello world")
                 .subscribe(item -> log.info("value : {}", item));

@@ -1,11 +1,7 @@
 package com.yicj.user.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import reactor.core.publisher.Mono;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author yicj
@@ -17,10 +13,10 @@ import reactor.core.publisher.Mono;
 public class HelloController {
 
     @GetMapping("/index")
-    public Mono<String> index(
+    public String index(
             @RequestHeader(value = "x-token", required = false) String xtoken){
         log.info("x-token value : {}", xtoken);
-        return Mono.fromSupplier(() -> "user service hello index !") ;
+        return "user service hello index !" ;
     }
 
 }

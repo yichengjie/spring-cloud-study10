@@ -17,19 +17,19 @@ public class AppConfig {
     @Value("${server.servlet.context-path}")
     private String contextPath ;
 
-    @Bean
-    public WebFilter contextPathWebFilter() {
-        return (exchange, chain) -> {
-            ServerHttpRequest request = exchange.getRequest();
-            if (request.getURI().getPath().startsWith(contextPath)) {
-                // 将request的ContentPath设置配置中的contextPath
-                ServerWebExchange newExchange = exchange.mutate()
-                        .request(request.mutate().contextPath(contextPath).build())
-                        .build();
-                return chain.filter(newExchange);
-            }
-            return chain.filter(exchange);
-        };
-    }
+//    @Bean
+//    public WebFilter contextPathWebFilter() {
+//        return (exchange, chain) -> {
+//            ServerHttpRequest request = exchange.getRequest();
+//            if (request.getURI().getPath().startsWith(contextPath)) {
+//                // 将request的ContentPath设置配置中的contextPath
+//                ServerWebExchange newExchange = exchange.mutate()
+//                        .request(request.mutate().contextPath(contextPath).build())
+//                        .build();
+//                return chain.filter(newExchange);
+//            }
+//            return chain.filter(exchange);
+//        };
+//    }
 
 }
