@@ -1,5 +1,6 @@
 package com.yicj.user.controller;
 
+import com.yicj.common.constants.CommonConstants;
 import com.yicj.common.model.form.LoginForm;
 import com.yicj.common.model.form.RegisterForm;
 import com.yicj.common.model.vo.RestResponse;
@@ -46,7 +47,8 @@ public class AuthController {
     }
 
     @GetMapping("/findByToken")
-    public Mono<RestResponse<UserVO>> findByToken(@RequestHeader("token") String token){
+    public Mono<RestResponse<UserVO>> findByToken(
+            @RequestHeader(CommonConstants.HEADER_TOKEN_NAME) String token){
         log.info("[Controller] findByToken , token {}", token);
         CommonUtil.sleepQuiet(1000);
         return userService.findByToken(token)

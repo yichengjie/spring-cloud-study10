@@ -3,19 +3,6 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: add_request_parameter_route
-          uri: https://example.org
-          predicates:
-            - Path=/add_request_parameter_route
-          filters:
-            - name: Custom
-              args:
-                message: My Custom Message
-                preLogger: true
-                postLogger: true
-            - AddRequestParameter=red, blue
-            - AddResponseHeader=X-Response-Red, Blue
-            - StripPrefix=1
         - id: user_login
           uri: http://localhsot:8080
           predicates:
@@ -28,6 +15,12 @@ spring:
             - Path=/auth/register
           filters:
             - AddRequestParameter=red, blue
+        - id:  hello-user-service
+          uri: lb://hello-user-service
+          predicates:
+            - Path=/hello-gateway/user-service/**
+          filters:
+            - StripPrefix=1
       discovery:
         locator:
           enabled: false # 这里设置为ture后服务无法访问

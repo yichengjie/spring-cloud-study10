@@ -22,6 +22,6 @@ Accept: */*
 
 
 ### 根据token 查询用户信息
-GET http://localhost:8085/user-service/auth/findByToken
+GET http://localhost:8080/hello-gateway/user-service/auth/findByToken
 Accept: */*
-token: 679cfe76d09b4215b47a23be16c22a84
+x-token: 723401211d3a4024b7a0accaac47c6fd
