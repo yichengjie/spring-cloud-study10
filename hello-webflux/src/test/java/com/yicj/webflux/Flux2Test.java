@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 import java.time.DayOfWeek;
 import java.time.Duration;
@@ -73,6 +74,46 @@ public class Flux2Test {
                 .subscribe(value -> log.info("value : {}", value)) ;
         TimeUnit.SECONDS.sleep(5);
     }
+
+    @Test
+    public void onErrorReturn(){
+        Flux.just(1,2,3,4,5)
+                .flatMap(item -> {
+                    if (item == 3){
+                        return Mono.error(new RuntimeException("数字3发生异常！！")) ;
+                    }
+                    return Mono.just("hello ["+item+"]") ;
+                })
+                .onErrorReturn("fallback value ")
+                .subscribe(value -> log.info("value : {}", value)) ;
+    }
+
+
+    @Test
+    public void onErrorReturnAdvance(){
+        Flux.just(1,2,3,4,5)
+            .flatMap(item -> {
+                return this.sendEmail(item)
+                    .ignoreElement()
+                    .ofType(Integer.class)
+                    .onErrorReturn(item)
+                    .doOnError(e -> log.info("Failed to send {}", item))
+                    //.subscribeOn(Schedulers.boundedElastic())
+                    ;
+            })
+            .subscribe(value -> log.info("value : {}", value)) ;
+    }
+
+    private Mono<String> sendEmail(int item){
+        return Mono.fromSupplier(() -> {
+            if (item == 3){
+                throw new RuntimeException("数字3发生异常！！") ;
+            }
+            return "hello["+item+"]" ;
+        }) ;
+    }
+
+
 
     private Flux<String> loadRecordFor(DayOfWeek daw){
         switch (daw){
