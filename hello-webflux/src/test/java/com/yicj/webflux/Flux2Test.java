@@ -35,4 +35,23 @@ public class Flux2Test {
         flux.doOnError(error -> log.error("log global error : ", error))
             .subscribe(value -> log.info("value : {}", value));
     }
+
+    @Test
+    public void generate2(){
+        Flux<Object> flux = Flux.generate(
+                () -> 0, // 初始状态
+                (state, sink) -> {
+                    sink.next("3 x " + state + " = " + 3 * state);
+                    if (state == 10) {
+                        sink.complete();
+                    }
+                    return state + 1;// 改变状态
+                },
+                // 最后这个函数仅在最后执行一次，打印出 11
+                state -> log.info("state : {}", state)
+        );
+        // 订阅时触发request -> sink.next顺序产生数据
+        // 生产一个数据消费一个
+        flux.subscribe(value -> log.info("value : {}", value)) ;
+    }
 }
