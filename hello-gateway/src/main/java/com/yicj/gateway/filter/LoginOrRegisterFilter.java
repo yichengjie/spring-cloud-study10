@@ -21,9 +21,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 import java.util.Map;
 
@@ -43,6 +45,9 @@ public class LoginOrRegisterFilter implements GlobalFilter, Ordered {
     @Autowired
     private AuthFeignRpc feignRpc ;
 
+    @Autowired
+    private ThreadPoolTaskExecutor threadPoolTaskExecutor ;
+
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -52,15 +57,30 @@ public class LoginOrRegisterFilter implements GlobalFilter, Ordered {
         String path = request.getURI().getPath();
         if (path.equals(CommonConstants.GATEWAY_LOGIN_PATH)){
             // 登录操作
+            log.info("[Filter] user login access ....");
             String bodyContent = exchange.getAttribute(CommonConstants.CACHE_BODY_ATTRIBUTE);
             LoginForm form = JSON.parseObject(bodyContent, LoginForm.class);
-            return feignRpc.login(form)
-                    // 输出返回给前端
+//            return feignRpc.login(form)
+//                    // 输出返回给前端
+//                    .flatMap(token -> this.printToken(exchange, token))
+//                    .onErrorResume(error -> {
+//                        AppException exception = (AppException) error ;
+//                        return GatewayUtil.print2User(response, RestResponse.error(exception.getCode(), error.getMessage())) ;
+//                    });
+
+            // 这里使用subscribeOn切换独立线程池之后可以执行同步操作
+            // 如果切换成Schedulers.parallel还是会继续报错，无法使用阻塞式api
+            return Mono.fromSupplier(() -> authFeignClient.login(form))
+                    .flatMap(rest -> {
+                        log.info("[Filter] rest response : {}", rest);
+                        if (!RestResponse.isDefaultSuccess(rest.getCode())) {
+                            return GatewayUtil.print2User(response, RestResponse.error(rest.getCode(), rest.getMessage()));
+                        }
+                        return Mono.just(rest.getData());
+                    })
+                    .ofType(TokenVO.class)
                     .flatMap(token -> this.printToken(exchange, token))
-                    .onErrorResume(error -> {
-                        AppException exception = (AppException) error ;
-                        return GatewayUtil.print2User(response, RestResponse.error(exception.getCode(), error.getMessage())) ;
-                    });
+                    .subscribeOn(Schedulers.fromExecutor(threadPoolTaskExecutor)) ;
         }else if (path.equals(CommonConstants.GATEWAY_REGISTER_PATH)){
             String bodyContent = exchange.getAttribute(CommonConstants.CACHE_BODY_ATTRIBUTE);
             RegisterForm form = JSON.parseObject(bodyContent, RegisterForm.class);
