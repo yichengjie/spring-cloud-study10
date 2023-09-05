@@ -24,6 +24,7 @@
         <module>hello-open-feign</module>
         <module>hello-websecurity</module>
         <module>hello-common</module>
+        <module>sentinel-webmvc</module>
     </modules>
 
     <properties>
@@ -153,6 +154,12 @@
                 <groupId>io.github.openfeign</groupId>
                 <artifactId>feign-gson</artifactId>
                 <version>12.5</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-transport-simple-http</artifactId>
+                <version>1.8.6</version>
             </dependency>
 
         </dependencies>
