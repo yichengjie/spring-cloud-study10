@@ -4,6 +4,8 @@ import feign.Feign;
 import feign.gson.GsonDecoder;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+
+import java.lang.reflect.Type;
 import java.util.List;
 
 /**
@@ -15,6 +17,8 @@ public class GitHubClientTest {
 
     @Test
     public void hello(){
+        Type type = GitHubClient.class ;
+
         GitHubClient github = Feign.builder()
                 .decoder(new GsonDecoder())
                 .target(GitHubClient.class, "https://api.github.com");
