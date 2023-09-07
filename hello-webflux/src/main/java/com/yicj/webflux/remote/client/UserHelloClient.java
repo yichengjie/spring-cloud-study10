@@ -1,7 +1,6 @@
-package com.yicj.nacos.client.remote.client;
+package com.yicj.webflux.remote.client;
 
 import org.springframework.web.service.annotation.GetExchange;
-import reactor.core.publisher.Mono;
 
 /**
  * @author yicj
