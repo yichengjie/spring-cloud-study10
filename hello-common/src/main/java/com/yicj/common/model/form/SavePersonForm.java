@@ -1,4 +1,4 @@
-package com.yicj.webflux.model.form;
+package com.yicj.common.model.form;
 
 import lombok.Data;
 
@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 /**
  * @author yicj
- * @date 2023年08月26日 17:46
+ * @date 2023年09月07日 14:11
  */
 @Data
 public class SavePersonForm implements Serializable {

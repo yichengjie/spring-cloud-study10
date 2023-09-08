@@ -1,7 +1,7 @@
 package com.yicj.webflux.service;
 
+import com.yicj.common.model.form.ListPersonForm;
 import com.yicj.webflux.HelloWebFluxApplication;
-import com.yicj.webflux.model.form.ListPersonForm;
 import com.yicj.webflux.repository.entity.PersonEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;

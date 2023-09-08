@@ -1,4 +1,4 @@
-package com.yicj.webflux.model.form;
+package com.yicj.common.model.form;
 
 import lombok.Data;
 

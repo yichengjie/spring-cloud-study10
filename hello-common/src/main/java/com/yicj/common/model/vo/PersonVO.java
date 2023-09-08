@@ -1,4 +1,4 @@
-package com.yicj.webflux.model.vo;
+package com.yicj.common.model.vo;
 
 import lombok.Data;
 

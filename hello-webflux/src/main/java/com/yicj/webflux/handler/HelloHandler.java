@@ -1,7 +1,7 @@
 package com.yicj.webflux.handler;
 
-import com.yicj.webflux.model.form.ListPersonForm;
-import com.yicj.webflux.model.form.SavePersonForm;
+import com.yicj.common.model.form.ListPersonForm;
+import com.yicj.common.model.form.SavePersonForm;
 import com.yicj.webflux.repository.entity.PersonEntity;
 import com.yicj.webflux.service.PersonService;
 import com.yicj.webflux.utils.CommonUtil;
