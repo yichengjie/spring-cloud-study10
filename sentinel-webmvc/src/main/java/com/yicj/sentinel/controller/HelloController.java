@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/hello")
 public class HelloController {
 
-    @Autowired
-    private HttpMessageConverters httpMessageConverters ;
+    //@Autowired
+    //private HttpMessageConverters httpMessageConverters ;
 
     @SentinelResource("HelloWorld")
     @GetMapping("/index")
