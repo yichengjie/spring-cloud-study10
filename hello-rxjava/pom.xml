@@ -16,10 +16,14 @@
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
-
     <dependencies>
         <dependency>
-            <groupId>io.reactivex.rxjava3</groupId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.reactivex</groupId>
             <artifactId>rxjava</artifactId>
         </dependency>
 
@@ -67,6 +71,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>

@@ -25,6 +25,7 @@
         <module>hello-websecurity</module>
         <module>hello-common</module>
         <module>sentinel-webmvc</module>
+        <module>hello-rxjava3</module>
         <module>hello-rxjava</module>
     </modules>
 
@@ -69,6 +70,12 @@
                 <groupId>io.reactivex.rxjava3</groupId>
                 <artifactId>rxjava</artifactId>
                 <version>3.1.7</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.reactivex</groupId>
+                <artifactId>rxjava</artifactId>
+                <version>1.3.8</version>
             </dependency>
 
             <dependency>
