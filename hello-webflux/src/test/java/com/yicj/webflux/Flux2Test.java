@@ -104,6 +104,21 @@ public class Flux2Test {
             .subscribe(value -> log.info("value : {}", value)) ;
     }
 
+
+    @Test
+    public void flatmap() throws InterruptedException {
+        Flux.range(1,5)
+                .flatMap(item -> {
+                    return Mono.fromSupplier(() -> {
+                        log.info("flat map item : {}", item);
+                       return Mono.just(item) ;
+                    }).subscribeOn(Schedulers.boundedElastic()) ;
+                })
+                //.subscribeOn(Schedulers.boundedElastic())
+                .subscribe(item -> log.info("ret value : {}", item)) ;
+        Thread.sleep(1000);
+    }
+
     private Mono<String> sendEmail(int item){
         return Mono.fromSupplier(() -> {
             if (item == 3){
