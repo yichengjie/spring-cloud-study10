@@ -25,6 +25,7 @@
         <module>hello-websecurity</module>
         <module>hello-common</module>
         <module>sentinel-webmvc</module>
+        <module>hello-rxjava</module>
     </modules>
 
     <properties>
@@ -62,6 +63,12 @@
                 <version>${spring-alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>io.reactivex.rxjava3</groupId>
+                <artifactId>rxjava</artifactId>
+                <version>3.1.7</version>
             </dependency>
 
             <dependency>
