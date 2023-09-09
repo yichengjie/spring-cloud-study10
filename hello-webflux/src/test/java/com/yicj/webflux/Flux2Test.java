@@ -1,5 +1,6 @@
 package com.yicj.webflux;
 
+import com.yicj.common.utils.CommonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
@@ -68,6 +69,23 @@ public class Flux2Test {
     }
 
     @Test
+    public void flatMap2() throws InterruptedException {
+        Flux.range(1,5)
+                .flatMap(item -> {
+                    return Mono.defer(() -> {
+                        log.info("flat map item : {}", item);
+                        return Mono.just(item) ;
+                    }).subscribeOn(Schedulers.boundedElastic()) ;
+                })
+                //.subscribeOn(Schedulers.boundedElastic())
+                .subscribe(item -> {
+                    log.info("ret value : {}", item) ;
+                    CommonUtil.sleepQuiet(1000);
+                }) ;
+        Thread.sleep(5000);
+    }
+
+    @Test
     public void concatMap() throws InterruptedException {
         Flux.just(DayOfWeek.SUNDAY, DayOfWeek.MONDAY)
                 .concatMap(this::loadRecordFor)
@@ -105,19 +123,6 @@ public class Flux2Test {
     }
 
 
-    @Test
-    public void flatmap() throws InterruptedException {
-        Flux.range(1,5)
-                .flatMap(item -> {
-                    return Mono.fromSupplier(() -> {
-                        log.info("flat map item : {}", item);
-                       return Mono.just(item) ;
-                    }).subscribeOn(Schedulers.boundedElastic()) ;
-                })
-                //.subscribeOn(Schedulers.boundedElastic())
-                .subscribe(item -> log.info("ret value : {}", item)) ;
-        Thread.sleep(1000);
-    }
 
     private Mono<String> sendEmail(int item){
         return Mono.fromSupplier(() -> {

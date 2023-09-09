@@ -21,4 +21,18 @@ public class Mono2Test {
         Thread.sleep(1000);
     }
 
+
+    @Test
+    public void cache(){
+        Mono<Object> mono = Mono.create(monoSink -> {
+            log.info("----------");
+            monoSink.success("hello");
+        })
+        .cache()
+        ;
+        //
+        mono.subscribe(value -> log.info("value : {}", value)) ;
+        mono.subscribe(value -> log.info("value : {}", value)) ;
+    }
+
 }
