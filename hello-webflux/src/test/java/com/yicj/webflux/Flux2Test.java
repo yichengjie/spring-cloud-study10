@@ -122,6 +122,13 @@ public class Flux2Test {
             .subscribe(value -> log.info("value : {}", value)) ;
     }
 
+    @Test
+    public void delay(){
+        Mono.delay(Duration.ofMillis(500))
+                .subscribe(value -> log.info("item : {}", value)) ;
+        CommonUtil.sleepQuiet(1000);
+    }
+
 
 
     private Mono<String> sendEmail(int item){
