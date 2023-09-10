@@ -27,6 +27,7 @@
         <module>sentinel-webmvc</module>
         <module>hello-rxjava3</module>
         <module>hello-rxjava</module>
+        <module>hello-mongodb</module>
     </modules>
 
     <properties>
