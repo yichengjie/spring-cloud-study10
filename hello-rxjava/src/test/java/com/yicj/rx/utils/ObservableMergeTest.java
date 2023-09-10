@@ -47,4 +47,10 @@ public class ObservableMergeTest {
         CommonUtil.sleepQuiet(300);
     }
 
+    @Test
+    public void hello(){
+        Observable.just(null)
+                .subscribe(value -> log.info( "value : {}", value)) ;
+    }
+
 }
