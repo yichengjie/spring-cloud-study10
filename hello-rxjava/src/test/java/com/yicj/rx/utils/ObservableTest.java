@@ -8,6 +8,7 @@ import rx.Subscriber;
 import rx.internal.util.ActionSubscriber;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author: yicj
@@ -18,17 +19,7 @@ public class ObservableTest {
 
     List<Subscriber<? super Integer>> subscribers = new CopyOnWriteArrayList<>() ;
 
-    @Test
-    public void create(){
-        Observable<Integer> observable = Observable.unsafeCreate(subscriber -> subscriber.add(subscriber));
 
-         Subscriber subscriber = new ActionSubscriber(value ->{
-
-         }, error -> {},  () ->{
-
-         }) ;
-
-    }
 
     @Test
     public void subscribe(){
@@ -38,6 +29,19 @@ public class ObservableTest {
                 error -> log.info("error :", error),
                 () -> log.info("complete.....")
             ) ;
+    }
+
+
+    @Test
+    public void create(){
+        Observable<Integer> observable = Observable.unsafeCreate(subscriber -> subscriber.add(subscriber));
+
+        Subscriber subscriber = new ActionSubscriber(value ->{
+
+        }, error -> {},  () ->{
+
+        }) ;
+
     }
 
 }
