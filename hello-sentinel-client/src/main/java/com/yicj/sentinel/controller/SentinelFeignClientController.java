@@ -1,7 +1,9 @@
 package com.yicj.sentinel.controller;
 
+import com.yicj.sentinel.feign.NacosHelloClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,31 +16,27 @@ import java.net.URI;
 
 /**
  * @author yicj
- * @date 2023年09月12日 16:06
+ * @date 2023年09月12日 16:15
  */
 @Slf4j
 @RestController
-@RequestMapping("/restTemplate/hello")
-public class RestTemplateController {
+@RequestMapping("/feignClient/hello")
+public class SentinelFeignClientController {
 
     @Autowired
-    private RestTemplate restTemplate ;
+    @Qualifier("nacosHelloClient")
+    private NacosHelloClient nacosHelloClient ;
 
     @GetMapping("/index")
     public String index(){
-        URI uri = UriComponentsBuilder.fromHttpUrl("http://nacos-client-app/hello/index")
-                .build()
-                .toUri();
-        HttpMethod httpMethod = HttpMethod.GET;
-        RequestEntity<String> requestEntity = new RequestEntity<>(httpMethod, uri);
-        String retValue = restTemplate.exchange(requestEntity, String.class).getBody();
+        String retValue = nacosHelloClient.hello();
         log.info("ret value : {}", retValue);
         return retValue ;
     }
 
     @GetMapping("/exception")
     public String exception(){
-        String retValue = restTemplate.getForObject("http://nacos-client-app/hello/exception", String.class);
+        String retValue = nacosHelloClient.exception() ;
         log.info("ret value : {}", retValue);
         return retValue ;
     }
