@@ -18,7 +18,7 @@ public class SentinelConfig {
     @LoadBalanced
     @SentinelRestTemplate(
             blockHandler = "handleBlock", blockHandlerClass = GlobalExceptionUtil.class,
-            fallback = "handleFallback", fallbackClass = GlobalExceptionUtil.class
+            fallback = "fallback", fallbackClass = GlobalExceptionUtil.class
     )
     public RestTemplate restTemplate(){
 
