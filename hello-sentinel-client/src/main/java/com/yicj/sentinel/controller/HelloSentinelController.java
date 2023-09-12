@@ -1,5 +1,6 @@
 package com.yicj.sentinel.controller;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,5 +18,6 @@ public class HelloSentinelController {
     public String index(){
         return "hello sentinel client index !" ;
     }
+
 
 }
