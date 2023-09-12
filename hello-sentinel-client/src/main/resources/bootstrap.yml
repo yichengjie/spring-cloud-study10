@@ -13,7 +13,17 @@ spring:
       transport:
         dashboard: 127.0.0.1:8858
         port: 8719
-# 如果不打开feign的fallback降级配置，报错时将直接抛出错误信息
+# sentinel实现对feign请求的保护
 feign:
   sentinel:
     enabled: true
+# sentinel实现对RestTemplate请求的保护
+resttemplate:
+  sentinel:
+    enabled: true
+#暴露actuator端点   http://localhost:8800/actuator/sentinel
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: '*'

@@ -1,0 +1,5 @@
+### rest template hello index
+GET http://localhost:8082/hello-sentinel-client/restTemplate/hello/index
+
+### rest template hello exception
+GET http://localhost:8082/hello-sentinel-client/restTemplate/hello/exception

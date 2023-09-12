@@ -1,5 +1,8 @@
 package com.yicj.sentinel.config;
 
+import com.alibaba.cloud.sentinel.annotation.SentinelRestTemplate;
+import com.yicj.sentinel.utils.GlobalExceptionUtil;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
@@ -12,6 +15,11 @@ import org.springframework.web.client.RestTemplate;
 public class SentinelConfig {
 
     @Bean
+    @LoadBalanced
+    @SentinelRestTemplate(
+            blockHandler = "handleBlock", blockHandlerClass = GlobalExceptionUtil.class,
+            fallback = "handleFallback", fallbackClass = GlobalExceptionUtil.class
+    )
     public RestTemplate restTemplate(){
 
         return new RestTemplate() ;

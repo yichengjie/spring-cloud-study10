@@ -15,7 +15,6 @@ public class HelloSentinelController {
 
     @GetMapping("/index")
     public String index(){
-
         return "hello sentinel client index !" ;
     }
 
