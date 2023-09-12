@@ -25,7 +25,7 @@ public class SentinelFallbackController {
 
 
     @GetMapping("/ignore-exception")
-    @SentinelResource(value = "sentinelFallbackException",
+    @SentinelResource(value = "sentinelFallbackIgnoreException",
             fallback = "handleFallback",
             fallbackClass = SentinelFallbackControllerFallback.class,
             exceptionsToIgnore = {NullPointerException.class}

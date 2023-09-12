@@ -1,5 +1,5 @@
 ### rest template hello index
-GET http://localhost:8082/hello-sentinel-client/sentinel/fallback/exception?code=2
+GET http://localhost:8082/hello-sentinel-client/sentinel/fallback/exception?code=1
 
 ### rest template hello exception
 GET http://localhost:8082/hello-sentinel-client/sentinel/fallback/ignore-exception?code=2

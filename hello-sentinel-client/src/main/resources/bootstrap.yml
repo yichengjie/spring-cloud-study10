@@ -13,6 +13,15 @@ spring:
       transport:
         dashboard: 127.0.0.1:8858
         port: 8719
+      datasource:
+        ds:
+          nacos:
+            server-addr: 127.0.0.1:8848
+            # namespace: public  # 注意public空间下不能显示的设置为public否则获取不到配置
+            dataId: sentinel-client-app-sentinel.json
+            groupId: DEFAULT_GROUP
+            data-type: json
+            rule-type: flow
 # sentinel实现对feign请求的保护
 feign:
   sentinel:
