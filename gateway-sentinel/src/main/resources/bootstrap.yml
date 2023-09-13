@@ -7,6 +7,18 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8858
+        port: 8719
+      filter: # 设置为false将不自动加入请求url
+        enabled: false
+# actuator配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
 # log config
 logging:
   level:
