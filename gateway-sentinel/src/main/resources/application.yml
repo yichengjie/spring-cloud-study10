@@ -1,0 +1,14 @@
+server:
+  port: 8080
+spring:
+  cloud:
+    gateway:
+      enabled: true
+      discovery:
+        locator:
+          lower-case-service-id: true
+      routes:
+        - id: hello-user-service
+          uri: lb://hello-user-service
+          predicates:
+            - Path=/user-service/**
