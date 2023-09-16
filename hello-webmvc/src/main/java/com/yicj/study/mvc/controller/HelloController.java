@@ -2,12 +2,11 @@ package com.yicj.study.mvc.controller;
 
 import com.yicj.study.mvc.model.form.HelloIndexForm;
 import com.yicj.study.mvc.utils.CommonUtils;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.async.DeferredResult;
 
+import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.util.concurrent.CompletableFuture;

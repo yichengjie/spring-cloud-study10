@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.reactive.function.client.support.WebClientAdapter;
-import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 
 /**
  * @author yicj
@@ -41,12 +39,12 @@ public class WebClientTest2 {
     public void index() throws InterruptedException {
         WebClient webClient = builder.baseUrl("http://hello-user-server/user-service")
                 .build();
-        HttpServiceProxyFactory factory = HttpServiceProxyFactory
-                .builder(WebClientAdapter.forClient(webClient))
-                .build();
-        UserHelloClient helloClient = factory.createClient(UserHelloClient.class);
-        String value = helloClient.index();
-        log.info("value : {}",value);
+//        HttpServiceProxyFactory factory = HttpServiceProxyFactory
+//                .builder(WebClientAdapter.forClient(webClient))
+//                .build();
+//        UserHelloClient helloClient = factory.createClient(UserHelloClient.class);
+//        String value = helloClient.index();
+//        log.info("value : {}",value);
     }
 
 }
