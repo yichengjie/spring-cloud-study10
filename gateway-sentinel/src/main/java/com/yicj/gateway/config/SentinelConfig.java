@@ -34,7 +34,7 @@ import static org.springframework.web.reactive.function.BodyInserters.fromValue;
  * @author yicj
  * @date 2023年09月13日 12:58
  */
-@Configuration
+//@Configuration
 public class SentinelConfig {
 
 
