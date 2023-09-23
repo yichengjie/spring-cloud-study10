@@ -1,0 +1,2 @@
+### 发送消息
+GET http://localhost:8086/greetings/send?message=test hello world

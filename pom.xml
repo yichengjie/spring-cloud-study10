@@ -29,6 +29,7 @@
         <module>hello-rxjava</module>
         <module>hello-mongodb</module>
         <module>gateway-sentinel</module>
+        <module>hello-stream-kafka</module>
     </modules>
 
     <properties>
