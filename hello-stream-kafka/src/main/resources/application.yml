@@ -8,11 +8,17 @@ spring:
           brokers: 192.168.99.51:9092
           replication-factor: 1
         bindings:
-          greetings-in:
-            destination: greetings
-            contentType: application/json
-          greetings-out:
-            destination: greetings
-            contentType: application/json
+          output:
+            destination: stream-demo
+            content-type: text/plain
+          input:
+            destination: stream-demo
+            content-type: text/plain
+          #greetings-in:
+#            destination: greetings
+#            contentType: application/json
+#          greetings-out:
+#            destination: greetings
+#            contentType: application/json
 
 

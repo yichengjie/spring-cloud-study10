@@ -8,7 +8,7 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 @Slf4j
-@Component
+//@Component
 public class GreetingsListener {
 
     @StreamListener(GreetingsStreams.INPUT)

@@ -4,6 +4,7 @@ import com.yicj.stream.model.dto.Greetings;
 import com.yicj.stream.support.GreetingsStreams;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.MessageBuilder;
@@ -15,7 +16,8 @@ import org.springframework.util.MimeTypeUtils;
  * @date: 2023/9/23 18:49
  */
 @Slf4j
-@Service
+//@Service
+//@EnableBinding(GreetingsStreams.class)
 public class GreetingService {
 
     @Autowired
