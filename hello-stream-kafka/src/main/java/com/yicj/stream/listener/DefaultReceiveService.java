@@ -6,14 +6,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.cloud.stream.messaging.Sink;
+import org.springframework.messaging.handler.annotation.Payload;
 
 @Slf4j
 @EnableBinding(Sink.class)
 public class DefaultReceiveService {
  
     @StreamListener(Sink.INPUT)
-    public void receive(Object payload){
+    public void receive(@Payload Object payload){
         HelloMessage message = JSON.parseObject(payload.toString(), HelloMessage.class);
-        log.info("consumer receive message : {}", message);
+        log.info("========> consumer receive message : {}", message);
     }
 }
