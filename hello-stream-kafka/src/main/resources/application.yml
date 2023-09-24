@@ -7,13 +7,13 @@ spring:
         binder:
           brokers: 192.168.99.51:9092
           replication-factor: 1
+          auto-create-topics: true
         bindings:
           output:
             destination: stream-demo
             content-type: text/plain
           input:
             destination: stream-demo
-            content-type: text/plain
           #greetings-in:
 #            destination: greetings
 #            contentType: application/json

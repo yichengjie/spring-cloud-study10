@@ -1,6 +1,7 @@
 package com.yicj.stream.controller;
 
-import com.yicj.stream.service.SendService;
+import com.yicj.stream.model.dto.HelloMessage;
+import com.yicj.stream.service.DefaultSendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,10 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class SendController {
 
     @Autowired
-    private SendService sendService ;
+    private DefaultSendService sendService ;
 
     @GetMapping("/message/{msg}")
-    public void send(@PathVariable("msg") String msg){
-        sendService.sendMsg(msg);
+    public String send(@PathVariable("msg") String msg){
+        HelloMessage message = new HelloMessage(1, msg) ;
+        sendService.sendMsg(message);
+        return "success";
     }
 }

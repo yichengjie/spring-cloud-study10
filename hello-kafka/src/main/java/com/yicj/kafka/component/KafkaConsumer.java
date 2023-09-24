@@ -7,6 +7,7 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
+import java.util.Optional;
 
 /**
  * <h1>Kafka 消费者</h1>
@@ -23,14 +24,14 @@ public class KafkaConsumer {
      * */
     @KafkaListener(
         topics = {"hello-kafka-topic"},
-        groupId = "hello-kafka-group",
+        groupId = "hello-kafka",
         containerFactory = "kafkaListenerContainerFactory"
     )
     public void listener01(ConsumerRecord<String, String> record) throws Exception {
         String key = record.key();
         String value = record.value();
         HelloMessage kafkaMessage = mapper.readValue(value, HelloMessage.class);
-        log.info("in listener consume kafka message: [{}], [{}]", key, mapper.writeValueAsString(kafkaMessage));
+        log.info("in listener01 consume kafka message: [{}], [{}]", key, mapper.writeValueAsString(kafkaMessage));
     }
 
 }
