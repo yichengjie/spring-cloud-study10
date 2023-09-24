@@ -31,6 +31,7 @@
         <module>gateway-sentinel</module>
         <module>hello-stream-kafka</module>
         <module>hello-redisson</module>
+        <module>hello-kafka</module>
     </modules>
 
     <properties>

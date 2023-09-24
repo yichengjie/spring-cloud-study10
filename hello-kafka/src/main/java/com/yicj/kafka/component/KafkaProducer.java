@@ -1,0 +1,46 @@
+package com.yicj.kafka.component;
+
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
+import org.springframework.stereotype.Component;
+import org.springframework.util.concurrent.ListenableFuture;
+
+
+/**
+ * <h1>kafka 生产者</h1>
+ * */
+@Slf4j
+@Component
+public class KafkaProducer {
+
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
+
+    /**
+     * <h2>发送 kafka 消息</h2>
+     * */
+    public void sendMessage(String key, String value, String topic) {
+        if (StringUtils.isBlank(value) || StringUtils.isBlank(topic)) {
+            throw new IllegalArgumentException("value or topic is null or empty");
+        }
+        ListenableFuture<SendResult<String, String>> future = StringUtils.isBlank(key) ?
+                kafkaTemplate.send(topic, value) : kafkaTemplate.send(topic, key, value);
+        // 异步回调的方式获取通知
+        future.addCallback(success -> {
+                assert null != success && null != success.getRecordMetadata();
+                // 发送到 kafka 的 topic
+                String _topic = success.getRecordMetadata().topic();
+                // 消息发送到的分区
+                int partition = success.getRecordMetadata().partition();
+                // 消息在分区内的 offset
+                long offset = success.getRecordMetadata().offset();
+                log.info("send kafka message success: [{}], [{}], [{}]", _topic, partition, offset);
+            }, failure -> {
+                log.error("send kafka message failure: [{}], [{}], [{}]", key, value, topic);
+            }
+        );
+    }
+}
