@@ -14,6 +14,8 @@ spring:
             content-type: text/plain
           input:
             destination: stream-demo
+            consumer:
+              ackMode: MANUAL
           #greetings-in:
 #            destination: greetings
 #            contentType: application/json
