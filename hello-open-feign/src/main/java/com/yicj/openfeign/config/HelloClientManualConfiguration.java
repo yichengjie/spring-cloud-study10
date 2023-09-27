@@ -24,8 +24,8 @@ public class HelloClientManualConfiguration {
     private Contract contract ;
 
     public HelloClientManual buildHelloClientManual(){
-        //String url = "http://127.0.0.1:8081" ;
-        String url = "http://nacos-client-app" ;
+        String url = "http://127.0.0.1:8081" ;
+        //String url = "http://nacos-client-app" ;
         HelloClientManual target = Feign.builder()
                 .client(client)
                 .encoder(encoder)
