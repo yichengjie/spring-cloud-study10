@@ -35,6 +35,7 @@
         <module>hello-validation</module>
         <module>hello-converter</module>
         <module>hello-spring-test</module>
+        <module>hello-spring-docker</module>
     </modules>
 
     <properties>
