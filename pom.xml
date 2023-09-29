@@ -33,6 +33,7 @@
         <module>hello-redisson</module>
         <module>hello-kafka</module>
         <module>hello-validation</module>
+        <module>hello-converter</module>
     </modules>
 
     <properties>
