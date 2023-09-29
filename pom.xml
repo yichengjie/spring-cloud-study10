@@ -11,7 +11,7 @@
     <modules>
         <module>eureka-server</module>
         <module>eureka-client</module>
-        <module>hello-springdoc</module>
+        <module>hello-spring-doc</module>
         <module>hello-database</module>
         <module>hello-minio</module>
         <module>hello-gateway</module>
@@ -22,7 +22,7 @@
         <module>hello-webflux</module>
         <module>hello-user-service</module>
         <module>hello-open-feign</module>
-        <module>hello-websecurity</module>
+        <module>hello-web-security</module>
         <module>hello-common</module>
         <module>sentinel-webmvc</module>
         <module>hello-rxjava3</module>
@@ -32,6 +32,7 @@
         <module>hello-stream-kafka</module>
         <module>hello-redisson</module>
         <module>hello-kafka</module>
+        <module>hello-validation</module>
     </modules>
 
     <properties>
@@ -216,6 +217,12 @@
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
                     <version>${spring-boot.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.1.2</version>
                 </plugin>
             </plugins>
         </pluginManagement>

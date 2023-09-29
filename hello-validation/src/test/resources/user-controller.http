@@ -1,0 +1,6 @@
+### 新建用户
+POST http://localhost:8083/user/createUser
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+
+name=hello111111111111111111111111
