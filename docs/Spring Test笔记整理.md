@@ -37,7 +37,10 @@
                     ).andExpect(
                             MockMvcResultMatchers.jsonPath("$.username")
                             .value("test mock user")
-                    );
+                    ).andExpect(
+                        MockMvcResultMatchers.content()
+                        .string(Matchers.containsString("mock user"))
+                    ).andDo(MockMvcResultHandlers.print());
         }
     }
     ```
