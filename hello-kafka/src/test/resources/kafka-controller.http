@@ -1,0 +1,2 @@
+### 发送kafka消息
+GET http://localhost:8086/kafka/send-message?key=1&topic=hello-kafka-topic

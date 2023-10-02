@@ -1,0 +1,26 @@
+server:
+  port: 8086
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: 192.168.99.51:9092
+          replication-factor: 1
+          auto-create-topics: true
+        bindings:
+          output:
+            destination: stream-demo
+            content-type: text/plain
+          input:
+            destination: stream-demo
+            consumer:
+              ackMode: MANUAL
+          #greetings-in:
+#            destination: greetings
+#            contentType: application/json
+#          greetings-out:
+#            destination: greetings
+#            contentType: application/json
+
+

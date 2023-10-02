@@ -2,6 +2,7 @@ package com.yicj.openfeign.client;
 
 import feign.Param;
 import feign.RequestLine;
+import org.springframework.cloud.openfeign.FeignClient;
 
 import java.util.List;
 
