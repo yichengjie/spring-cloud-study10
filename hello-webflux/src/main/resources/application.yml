@@ -4,9 +4,11 @@ logging:
   level:
     root: info
 spring:
-  cloud:
   application:
     name: hello-webflux
+  webflux:
+    base-path: /hello-webflux
+  cloud:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848

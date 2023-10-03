@@ -1,0 +1,20 @@
+### 新增用户
+POST http://localhost:8084/person
+Content-Type: application/json
+Accept: application/json
+
+{
+  "username": "赵六",
+  "address": "bjs"
+}
+
+### 查询全部数据
+GET http://localhost:8084/person
+
+
+### 根据用户名称查询
+GET http://localhost:8084/person?username=张三
+
+
+### 根据id查询
+GET http://localhost:8084/person/b58b0a237d5247fdb7af032cd7006bf6
