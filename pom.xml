@@ -37,6 +37,7 @@
         <module>hello-converter</module>
         <module>hello-spring-test</module>
         <module>hello-spring-docker</module>
+        <module>hello-spring-aop</module>
     </modules>
 
     <properties>
