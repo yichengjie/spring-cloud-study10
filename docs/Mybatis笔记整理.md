@@ -13,3 +13,14 @@
 6. SqlSource: 负责根据用户传递的parameterObject，动态地生成SQL语句，将信息封装到BoundSql对象种，并返回
 7. BoundSql: 表示动态生成的SQL语句以及相应的参数信息
 8. ResultSetHandler: 负责将JDBC返回的ResultSet结果集对象转换成List类型的集合
+#### 插件使用场景
+1. 分页功能
+2. 公共字段统一赋值
+3. 性能监控日志
+#### 插件可以拦截的方法
+1. 执行器Executor(query,update,commit,rollback...)
+2. SQL语法构造器StatementHandler
+3. 参数处理器ParameterHandler和结果处理器ResultSetHandler
+#### 自定义分页插件: https://mybatis.org/mybatis-3/configuration.html#plugins
+1. 编写Interceptor实现类
+2. 在xml配置plugin
