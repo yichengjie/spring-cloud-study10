@@ -24,3 +24,6 @@
 #### 自定义分页插件: https://mybatis.org/mybatis-3/configuration.html#plugins
 1. 编写Interceptor实现类
 2. 在xml配置plugin
+#### 其他
+1. MapperProxyFactory -> MapperProxy
+2. MybatisMapperProxy
