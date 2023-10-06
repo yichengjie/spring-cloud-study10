@@ -2,8 +2,8 @@ spring:
   jackson:
     time-zone: GMT+8
   datasource:
-    # driver-class-name: com.mysql.cj.jdbc.Driver
-    # url: jdbc:mysql://127.0.0.1:3306/test
+#     driver-class-name: com.mysql.cj.jdbc.Driver
+#     url: jdbc:mysql://127.0.0.1:3306/test
     ###
     # driver-class-name: com.mysql.cj.jdbc.Driver
     # url: jdbc:mysql://127.0.0.1:3306/test ?useSSL=false&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true

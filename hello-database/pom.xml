@@ -20,6 +20,7 @@
         <module>hello-jdbc</module>
         <module>hello-mybatis</module>
         <module>hello-jsqlparser</module>
+		<module>hello-mybatis-plugin</module>
     </modules>
     <packaging>pom</packaging>
 

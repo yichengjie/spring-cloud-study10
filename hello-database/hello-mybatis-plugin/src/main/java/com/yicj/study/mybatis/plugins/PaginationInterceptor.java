@@ -1,6 +1,6 @@
-package com.yicj.mybatis.plugins;
+package com.yicj.study.mybatis.plugins;
 
-import com.yicj.mybatis.model.vo.PageRowBounds;
+import com.yicj.study.mybatis.model.vo.PageRowBounds;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.cache.CacheKey;
 import org.apache.ibatis.executor.Executor;

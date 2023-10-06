@@ -48,4 +48,5 @@ public interface UserMapper extends BaseMapper<UserEntity> {
             @Param("job") String job,
             @Param("company") String company,
             @Param("createBy") String createBy) ;
+
 }

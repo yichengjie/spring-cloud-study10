@@ -1,6 +1,7 @@
-package com.yicj.mybatis.model.vo;
+package com.yicj.study.mybatis.model.vo;
 
 import org.apache.ibatis.session.RowBounds;
+
 /**
  * @author yicj
  * @date 2023/10/6 20:35
