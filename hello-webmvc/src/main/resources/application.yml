@@ -10,3 +10,6 @@ management:
 context:
   listener:
     classes: com.yicj.study.mvc.component.MyApplicationListener
+hello:
+  kafka:
+    bootstrap-servers: https://hello.com
