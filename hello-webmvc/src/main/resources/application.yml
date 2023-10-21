@@ -7,3 +7,6 @@ management:
     web:
       exposure:
         include: '*'
+context:
+  listener:
+    classes: com.yicj.study.mvc.component.MyApplicationListener

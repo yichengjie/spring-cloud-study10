@@ -1,0 +1,11 @@
+#### SpringBoot事件发布
+1. SpringBoot在初始化SpringApplication对象的时候将配置在spring.factories中的ApplicationListener读取并设置倒listeners属性中
+2. SpringBoot在run方法的早期阶段将配置在spring.factories中的SpringApplicationRunListener读取并构造出SpringApplicationRunListeners对象
+3. SpringApplicationRunListener的实现类默认为EventPublishingRunListener
+4. SpringBoot早期发布的starting、environmentPrepared、contextPrepared、contextPrepared、contextLoaded等事件均由EventPublishingRunListener直接广播
+5. SpringBoot从started之后的事件由ApplicationContext直接发布
+#### 核心API
+1. EventPublishingRunListener
+2. SimpleApplicationEventMulticaster
+3. DelegatingApplicationListener
+4. LoggingApplicationListener
