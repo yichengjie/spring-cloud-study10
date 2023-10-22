@@ -1,21 +1,25 @@
 package com.yicj.study.mvc.component;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.ApplicationListener;
 
 /**
  * @author yicj
- * @date 2023年10月20日 10:13
+ * @date 2023/10/21 9:56
  */
 @Slf4j
 public class MyApplicationListener implements ApplicationListener<ApplicationStartedEvent> {
 
-    private int count = 0;
+    private static int staticIndex = 0 ;
+
+    private int instanceIndex = 0 ;
+
     @Override
     public void onApplicationEvent(ApplicationStartedEvent event) {
-
-        log.info("ApplicationReadyEvent execute index : [{}]", count ++);
+        staticIndex ++ ;
+        instanceIndex ++ ;
+        log.info("-------> MyApplicationListener ---> {}, static execute index : {}, instance execute index :{}",
+                event.getSource().getClass().getSimpleName(), staticIndex, instanceIndex);
     }
 }
