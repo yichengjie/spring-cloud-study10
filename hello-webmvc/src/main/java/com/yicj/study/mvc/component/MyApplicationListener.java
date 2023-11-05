@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Profile;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 /**
  * @author yicj
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Profile;
  */
 @Slf4j
 @Profile("dev")
+//@EnableWebMvc
 public class MyApplicationListener implements ApplicationListener<ApplicationStartedEvent> {
 
     private static int staticIndex = 0 ;

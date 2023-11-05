@@ -38,6 +38,7 @@
         <module>hello-spring-test</module>
         <module>hello-spring-docker</module>
         <module>hello-spring-aop</module>
+        <module>hello-ioc</module>
     </modules>
 
     <properties>
