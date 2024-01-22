@@ -1,31 +1,28 @@
-feign:
-  client:
-    config:
-      default:
-        connectTimeout: 5000
-        readTimeout: 5000
-        loggerLevel: basic
-      nacos-provider1:
-        connectTimeout: 5000
-        readTimeout: 5000
-        loggerLevel: full
-        #        errorDecoder: com.example.SimpleErrorDecoder
-        #        retryer: com.example.SimpleRetryer
-        defaultQueryParamters:
-          query: queryValue
-        defaultRequestHeaders:
-          header: headerValue
-        requestInterceptors:
-        #          - com.example.FooRequestInterceptor
-        #          - com.example.BarRequestInterceptor
-        decore404: false
-        #        encoder: com.example.SimpleEncoder
-        #        decoder: co.example.SimpleDecoder
-        #        contract: com.example.SimpleContract
-        #        capabilities:
-        #          - com.example.FooCapability
-        #          - com.example.BarCapability
-        metrics.enabled: false
-  metrics:
-    enabled: true
+#feign:
+#  client:
+#    config:
+#      default:
+#        connectTimeout: 5000
+#        readTimeout: 5000
+#        loggerLevel: basic
+#      nacos-provider1:
+#        connectTimeout: 5000
+#        readTimeout: 5000
+#        loggerLevel: full
+#        #        errorDecoder: com.example.SimpleErrorDecoder
+#        #        retryer: com.example.SimpleRetryer
+#        defaultRequestHeaders:
+#          header: headerValue
+#        requestInterceptors:
+#        decode404: false
+#        metrics:
+#          enabled: false
+#        #          - com.example.FooRequestInterceptor
+#        #          - com.example.BarRequestInterceptor
+#        #        encoder: com.example.SimpleEncoder
+#        #        decoder: co.example.SimpleDecoder
+#        #        contract: com.example.SimpleContract
+#        #        capabilities:
+#        #          - com.example.FooCapability
+#        #          - com.example.BarCapability
 

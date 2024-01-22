@@ -15,3 +15,4 @@
         <artifactId>spring-cloud-starter-loadbalancer</artifactId>
     </dependency>
     ```
+6. WebMvcConfigurerComposite在spring中Composite使用的比较多

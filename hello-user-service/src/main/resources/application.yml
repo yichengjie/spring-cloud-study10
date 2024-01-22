@@ -2,6 +2,9 @@ server:
   port: 8085
   servlet:
     context-path: /user-service
+  compression:
+    enabled: true
+    min-response-size: 10
 spring:
   application:
     name: hello-user-service
