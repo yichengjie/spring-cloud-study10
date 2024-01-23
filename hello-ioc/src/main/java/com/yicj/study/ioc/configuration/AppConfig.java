@@ -40,7 +40,7 @@ public class AppConfig {
     @ConditionalOnMissingBean(name = "helloService2")
     HelloService helloService(ObjectProvider<HelloRepository> helloRepositoryProvider) {
         HelloRepository helloRepository = helloRepositoryProvider.getIfAvailable();
-        HelloServiceImpl helloService = new HelloServiceImpl();
+        HelloServiceImpl helloService = new HelloServiceImpl("AppConfig HelloService");
         helloService.setRepository(helloRepository);
         return helloService;
     }

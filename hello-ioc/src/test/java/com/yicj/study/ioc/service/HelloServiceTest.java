@@ -20,6 +20,6 @@ class HelloServiceTest {
     @Test
     void hello(){
         String retValue = helloService.hello("张三");
-        log.info("ret value : {}", retValue);
+        log.info("ret value : {}, serviceName: {}", retValue, helloService.getName());
     }
 }

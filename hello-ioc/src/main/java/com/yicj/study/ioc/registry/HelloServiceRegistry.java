@@ -27,7 +27,7 @@ public class HelloServiceRegistry implements BeanDefinitionRegistryPostProcessor
         //
         AbstractBeanDefinition helloService =
                 BeanDefinitionBuilder.genericBeanDefinition(HelloServiceImpl.class)
-                //.addConstructorArgReference("redisRepository")
+                .addConstructorArgValue("BeanDefinitionRegistry HelloService")
                 .addPropertyReference("repository", "mysqlRepository")
                 .getBeanDefinition();
         registry.registerBeanDefinition("helloService", helloService);

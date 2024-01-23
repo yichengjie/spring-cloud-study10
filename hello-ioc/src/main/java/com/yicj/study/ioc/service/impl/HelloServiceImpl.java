@@ -7,7 +7,18 @@ import lombok.Data;
 @Data
 public class HelloServiceImpl implements HelloService {
 
+    private String name ;
+
     private HelloRepository repository ;
+
+    public HelloServiceImpl(String name){
+        this.name = name ;
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
+    }
 
     @Override
     public String hello(String name) {
