@@ -15,8 +15,7 @@ import org.springframework.stereotype.Component;
  * @author yicj
  * @date 2023/11/5 11:32
  */
-@Configuration/*(proxyBeanMethods = false)*/
-//@Component
+@Configuration
 public class AppConfig {
     @Bean
     public User user() {
@@ -34,10 +33,8 @@ public class AppConfig {
         return pet;
     }
 
-
-
-    @Bean("helloService2")
-    @ConditionalOnMissingBean(name = "helloService2")
+    @Bean
+    @ConditionalOnMissingBean(name = "helloService")
     HelloService helloService(ObjectProvider<HelloRepository> helloRepositoryProvider) {
         HelloRepository helloRepository = helloRepositoryProvider.getIfAvailable();
         HelloServiceImpl helloService = new HelloServiceImpl("AppConfig HelloService");

@@ -6,14 +6,18 @@ import com.yicj.study.ioc.service.impl.HelloServiceImpl;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.*;
+import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
+import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.stereotype.Component;
 
-
-@Component
-public class HelloServiceRegistry implements BeanDefinitionRegistryPostProcessor {
+public class HelloServiceRegistry implements ImportBeanDefinitionRegistrar {
 
     @Override
-    public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
+    public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
+        this.postProcessBeanDefinitionRegistry(registry);
+    }
+
+    private void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
         AbstractBeanDefinition redisRepository =
                 BeanDefinitionBuilder.genericBeanDefinition(RedisHelloRepository.class)
                 .getBeanDefinition();
@@ -30,11 +34,7 @@ public class HelloServiceRegistry implements BeanDefinitionRegistryPostProcessor
                 .addConstructorArgValue("BeanDefinitionRegistry HelloService")
                 .addPropertyReference("repository", "mysqlRepository")
                 .getBeanDefinition();
-        registry.registerBeanDefinition("helloService", helloService);
+        registry.registerBeanDefinition("helloService2", helloService);
     }
 
-    @Override
-    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-
-    }
 }
