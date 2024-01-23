@@ -2,6 +2,11 @@ package com.yicj.study.ioc.configuration;
 
 import com.yicj.study.ioc.configuration.model.Pet;
 import com.yicj.study.ioc.configuration.model.User;
+import com.yicj.study.ioc.repository.HelloRepository;
+import com.yicj.study.ioc.service.HelloService;
+import com.yicj.study.ioc.service.impl.HelloServiceImpl;
+import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
@@ -27,5 +32,16 @@ public class AppConfig {
         Pet pet = new Pet();
         pet.setName("阿猫");
         return pet;
+    }
+
+
+
+    @Bean("helloService2")
+    @ConditionalOnMissingBean(name = "helloService2")
+    HelloService helloService(ObjectProvider<HelloRepository> helloRepositoryProvider) {
+        HelloRepository helloRepository = helloRepositoryProvider.getIfAvailable();
+        HelloServiceImpl helloService = new HelloServiceImpl();
+        helloService.setRepository(helloRepository);
+        return helloService;
     }
 }

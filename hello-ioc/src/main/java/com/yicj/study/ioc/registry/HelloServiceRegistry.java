@@ -5,10 +5,7 @@ import com.yicj.study.ioc.repository.impl.RedisHelloRepository;
 import com.yicj.study.ioc.service.impl.HelloServiceImpl;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.beans.factory.support.AbstractBeanDefinition;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.support.BeanDefinitionRegistry;
-import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
+import org.springframework.beans.factory.support.*;
 import org.springframework.stereotype.Component;
 
 
@@ -24,6 +21,7 @@ public class HelloServiceRegistry implements BeanDefinitionRegistryPostProcessor
         //
         AbstractBeanDefinition mysqlRepository =
                 BeanDefinitionBuilder.genericBeanDefinition(MysqlHelloRepository.class)
+                .setPrimary(true)
                 .getBeanDefinition();
         registry.registerBeanDefinition("mysqlRepository", mysqlRepository);
         //
