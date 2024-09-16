@@ -39,6 +39,7 @@
         <module>hello-spring-docker</module>
         <module>hello-spring-aop</module>
         <module>hello-ioc</module>
+        <module>hello-stream</module>
     </modules>
 
     <properties>
